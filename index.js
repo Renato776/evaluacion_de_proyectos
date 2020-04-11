@@ -25,7 +25,7 @@ function build_flow(array,vida){
 			let entry = array[i]; //Entry is an object of ocurre array and valor value.			
 			for(let j = 0; j<entry.ocurre.length;j++){
 				let ocurrence = entry.ocurre[j];
-				answer[j] = answer[j]+entry.valor;
+				answer[ocurrence] = answer[ocurrence]+entry.valor;
 			}
 		}
 		return answer;
@@ -49,31 +49,31 @@ const option = function(details){
 	this.tir = 0;
 }
 function get_present(future,interest,n){
-	return future/Number(Math.pow(1+interest,n).toFixed(4));
+	return future/Math.pow(1+interest,n);
 }
 function get_anuality(present,n,interest){
-	let a = interest*Number(Math.pow(1+interest,n).toFixed(4));
-	a = a /Number((Math.pow(1+interest,n)-1).toFixed(4));
-	return a;
+	let a = (interest*Math.pow(1+interest,n))/(Math.pow(1+interest,n)-1);
+	return present*a;
 }
-function calculate_vpn(details,interest){
+function calculate_vpn(details,interest,debug = true){
 	//ALright, here all I have to do is to get every entry within details to present and add them together.
 	let positive  = 0;
 	let ingresos = details.ingresos;
 	for(let i = 0; i<ingresos.length;i++){
-		positive += Number(get_present(ingresos[i],interest,i).toFixed(4));
+		positive += get_present(ingresos[i],interest,i);
 	}
 	let negative = 0;
 	let egresos = details.egresos;
 	for(let i = 0; i<egresos.length;i++){
-		negative += Number(get_present(egresos[i],interest,i).toFixed(4));
+		negative += get_present(egresos[i],interest,i);
 	}
-	console.log('positive: '+positive);
-	console.log('negative: '+negative);
+	if(debug){
+		console.log('VPN = '+positive+' - '+negative);
+	}
 	return positive - negative;
 }
 function calculate_vaue(details,interest){
-	let vpn = calculate_vpn(details,interest);
+	let vpn = calculate_vpn(details,interest,false);
 	return get_anuality(vpn,details.ingresos.length-1,interest);
 }
 for(let i = 0; i<options.length; i++){
