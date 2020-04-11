@@ -1,26 +1,50 @@
 {
-  "interest": 10,
+  "interest": 0.025,
   "options": [
     {
-      "name": "Metodo A",
-      "anualidad": 6000,
+      "name": "Opcion A",
+      "anualidad": 300,
       "ingresos": [
         {
-          "valor": 2000,
+          "valor": 350,
           "ocurre": [
-            12
+            1
+          ]
+        },
+        {
+          "valor": 10,
+          "ocurre": 7
+        },
+        {
+          "valor": 450,
+          "ocurre": [
+            2
+          ]
+        },
+        {
+          "valor": 1500,
+          "ocurre": [
+            3,
+            6,
+            5
           ]
         }
       ],
       "egresos": [
         {
-          "valor": 36000,
+          "valor": 5025,
+          "ocurre": [
+            4
+          ]
+        },
+        {
+          "valor": 125000,
           "ocurre": [
             0
           ]
         }
       ],
-      "vida": 12
+      "vida": 7
     },
     {
       "name": "Opcion B",

@@ -6,16 +6,16 @@ if(my_args.length==0){
 const project_path = my_args[0];
 const fs = require('fs');
 const project = JSON.parse(fs.readFileSync(project_path));
-const interest = project.interest;
+const interest = project.interest/100;
 const options = project.options;
 const answers = [];
 function sparse_anuality(anualidad,array){
-	for (let i = 0; i<array.length; i++){
+	for (let i = 1; i<array.length; i++){
 		array[i] = array[i] + anualidad;
 	}
 	return array;
 }
-function build_flow(array vida){
+function build_flow(array,vida){
 	//Given an array which could be either ingresos or egresos.
 		let answer = [];
 		for(let i = 0; i<vida+1; i++){
@@ -49,11 +49,11 @@ const option = function(details){
 	this.tir = 0;
 }
 function get_present(future,interest,n){
-	return future/Math.pow(1+interest,n);
+	return future/Number(Math.pow(1+interest,n).toFixed(4));
 }
 function get_anuality(present,n,interest){
-	let a = interest*Math.pow(1+interest,n);
-	a = a /(Math.pow(1+interest,n)-1);
+	let a = interest*Number(Math.pow(1+interest,n).toFixed(4));
+	a = a /Number((Math.pow(1+interest,n)-1).toFixed(4));
 	return a;
 }
 function calculate_vpn(details,interest){
@@ -61,13 +61,15 @@ function calculate_vpn(details,interest){
 	let positive  = 0;
 	let ingresos = details.ingresos;
 	for(let i = 0; i<ingresos.length;i++){
-		positive += get_present(ingresos[i],interest,i);
+		positive += Number(get_present(ingresos[i],interest,i).toFixed(4));
 	}
 	let negative = 0;
 	let egresos = details.egresos;
 	for(let i = 0; i<egresos.length;i++){
-		negative += get_present(egresos[i],interest,i);
+		negative += Number(get_present(egresos[i],interest,i).toFixed(4));
 	}
+	console.log('positive: '+positive);
+	console.log('negative: '+negative);
 	return positive - negative;
 }
 function calculate_vaue(details,interest){
