@@ -1,5 +1,68 @@
 const my_args = process.argv.slice(2);
+const row_width = 25;
 const exactness = 4;
+function format_cell(cell_width,entry){
+	cell_width = cell_width-2;
+	let formatted_entry = "|";
+	if(entry.length==cell_width){
+		formatted_entry+=entry+"|";
+	}else if(entry.length<cell_width){
+		let filler_count = Math.floor((cell_width-entry.length)/2);
+		formatted_entry += fill_string(filler_count,' ');
+		formatted_entry += entry;
+		formatted_entry += fill_string(cell_width - filler_count - entry.length,' ');
+		formatted_entry+="|";
+	}else{
+		formatted_entry+=entry.substring(0,cell_width-1)+"-|";
+	}
+	return formatted_entry;
+}
+function format_title(size,title) {
+	console.log(format_cell(size,title));
+}
+function format_row(row,size){
+	let formatted_row = "";
+	for (let i =0; i<row.length;i++){
+		let entry = row[i];
+		let formatted_entry = format_cell(Math.floor(size/row.length),entry);
+		formatted_row+=formatted_entry;
+	}
+	console.log(formatted_row);
+}
+function print_object_header(object,size){
+	let header = [];
+	for	(let k = 0; k<Object.keys(object).length;k++){
+		header.push(Object.keys(object)[k]);
+	}
+	format_row(header,size);
+}
+function print_object_body(object,size){
+	let entry_row = [];
+	for (let j = 0; j<Object.keys(object).length;j++){
+		entry_row.push(object[Object.keys(object)[j]].toString());
+	}
+	format_row(entry_row,size);
+}
+function print_table_title(text,size){
+	console.log(fill_string(size,'-'));
+	format_title(size,text);
+	console.log(fill_string(size,'-'));
+
+}
+function print_object_list(table,size){
+	if(table.length==0)return;
+	print_object_header(table[0],size);
+	for (let i = 0; i<table.length; i ++){
+		print_object_body(table[i],size);
+	}
+}
+function fill_string(size,content) {
+	let s = "";
+	for (let i = 0; i<size; i++){
+		s+=content;
+	}
+	return s;
+}
 function truncate(number){
 	return Number(number.toFixed(exactness));
 }
@@ -219,32 +282,41 @@ function indicate_best_option(option) {
 	console.log("VAUE = "+option.vaue);
 	console.log("TIR = "+option.tir);
 }
+function resumen(){
+	let table_size = 85;
+	print_table_title("Resumen",table_size);
+	let useFull_data = [];
+	for (let i = 0; i<opts.length;i++){
+		let opt = opts[i];
+		let entry = {};
+		entry["name"] = opt.name;
+		entry["vaue"] = opt.vaue;
+		entry["vpn"] = opt.vpn;
+		entry["tir"] = opt.tir;
+		entry["vpb"] = opt.vpb;
+		entry["vpc"] = opt.vpc;
+		entry["vpb/vpc"] = opt.coeficient;
+		useFull_data.push(entry);
+	}
+	print_object_list(useFull_data,table_size);
+}
 function analisis_beneficio_costo_incremental(){
 	//First thing first, order the opts array by
-	console.log("------------------------------------------------------------");
-	console.log("----------- Analisis Beneficio - Costo incremental : -------");
-	console.log("------------------------------------------------------------");
-	opts = shellSort(opts);
-	opts = opts.reverse();
+	let row_width = 100;
+	print_table_title("Analisis Beneficio Costo incremental",row_width);
 	let table = [];
 	for (let i = opts.length-1; i>0;i--){
 		let b = opts[i];
 		let a = opts[i-1];
 		let entry = {};
-		entry["dif_vpb"] = a.vpb - b.vpb;
-		entry["dif_vpc"] = a.vpc - b.vpc;
-		entry["title"] = a.name +" - "+b.name;
-		entry["vpb_over_vpc"] = entry.dif_vpb/entry.dif_vpc;
+		entry["dif_vpb"] = b.vpb - a.vpb;
+		entry["dif_vpc"] = b.vpc - a.vpc;
+		entry["title"] = b.name +" - "+a.name;
+		entry["vpb/vpc"] = entry.dif_vpb/entry.dif_vpc;
+		entry["Justifica"] = entry["vpb/vpc"] >= 1;
 		table.push(entry);
-	}
-	for (let i = 0; i<table.length;i++){
-		let entry = table[i];
-		console.log(";-----------------------------------------------------------------");
-		for (let j = 0; j<Object.keys(entry).length;j++){
-			console.log(Object.keys(entry)[j]+" = "+entry[Object.keys(entry)[j] ]);
-		}
-		//console.log(";-----------------------------------------------------------------");
-	}
+	}table = table.reverse();
+	print_object_list(table,row_width);
 }
 
 const period = option_lives.reduce(lcm);
@@ -257,5 +329,7 @@ opts.forEach(opt=>{vpns.push(opt.vpn)});
 let best_option = get_max(vpns);
 best_option = opts[best_option];
 best_option.calculate_tir();
+opts = shellSort(opts);
 analisis_beneficio_costo_incremental();
 indicate_best_option(best_option);
+resumen();

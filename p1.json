@@ -2,7 +2,7 @@
   "interest": 10,
   "options": [
     {
-      "name": "A base de electricidad",
+      "name": "electricidad",
       "anualidad": -900,
       "ingresos": [
         {
@@ -22,7 +22,7 @@
       ],
       "vida": 6
     },{
-      "name": "A base de gas",
+      "name": "gas",
       "anualidad": -700,
       "ingresos": [
         {
@@ -42,7 +42,7 @@
       ],
       "vida": 6
     },{
-      "name": "A base de energia solar",
+      "name": "solar",
       "anualidad": -50,
       "ingresos": [
         {
