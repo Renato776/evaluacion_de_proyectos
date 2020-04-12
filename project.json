@@ -1,67 +1,81 @@
 {
-  "interest": 10,
+  "interest": 30,
   "options": [
     {
-      "name": "Metodo A",
-      "anualidad": 6000,
+      "name": "Opcion A",
+      "anualidad": 0,
       "ingresos": [
         {
-          "valor": 2000,
-          "ocurre": [
-            12
-          ]
-        }
-      ],
-      "egresos": [
-        {
-          "valor": 36000,
-          "ocurre": [
-            0
-          ]
-        }
-      ],
-      "vida": 12
-    },
-    {
-      "name": "Opcion B",
-      "anualidad": -8745,
-      "ingresos": [
-        {
-          "valor": 1800,
+          "valor": 50000,
           "ocurre": [
             1
           ]
-        },
-        {
-          "valor": 13.45,
+        },{
+          "valor": 125000,
           "ocurre": [
-            2
+            2,3
           ]
-        },
-        {
-          "valor": 4451.35,
-          "ocurre": [
-            3,
-            6,
-            5,
-            1,
-            2
-          ]
-        },
-        {
-          "valor": 50,
-          "ocurre": 8
         }
       ],
       "egresos": [
         {
-          "valor": 300054,
+          "valor": 150000,
           "ocurre": [
             0
           ]
         }
       ],
-      "vida": 8
+      "vida": 3
+    },
+    {
+      "name": "Opcion B",
+      "anualidad": 0,
+      "ingresos": [
+        {
+          "valor": 60000,
+          "ocurre": [
+            1
+          ]
+        },{
+          "valor": 70000,
+          "ocurre": [
+            2
+          ]
+        },{
+          "valor": 80000,
+          "ocurre": [
+            3
+          ]
+        },{
+          "valor": 90000,
+          "ocurre": [
+            4
+          ]
+        }
+      ],
+      "egresos": [
+        {
+          "valor": 165000,
+          "ocurre": [
+            0
+          ]
+        }
+      ],
+      "vida": 4
+    },
+    {
+      "name": "Opcion C",
+      "anualidad": 90000,
+      "ingresos": [],
+      "egresos": [
+        {
+          "valor": 180000,
+          "ocurre": [
+            0
+          ]
+        }
+      ],
+      "vida": 6
     }
   ]
 }
