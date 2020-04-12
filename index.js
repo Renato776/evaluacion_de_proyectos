@@ -14,6 +14,26 @@ const interest = project.interest/100;
 const options = project.options;
 const gcd = (a, b) => a ? gcd(b % a, a) : b;
 const lcm = (a, b) => a * b / gcd(a, b);
+function shellSort(arr) {
+	var len  = arr.length;
+	var gapSize =  Math.floor(len/2);
+
+	while(gapSize > 0){
+		for(var i = gapSize; i < len; i++) {
+
+			var temp = arr[i];
+			var j = i;
+
+			while(j >= gapSize && arr[j - gapSize].vpc > temp.vpc) {
+				arr[j] = arr[j - gapSize];
+				j -= gapSize;
+			}
+			arr[j] = temp;
+		}
+		gapSize = Math.floor(gapSize/2);
+	}
+	return arr;
+}
 function get_min(array) {
 	let lowest = 0;
 	for (let i = 1; i < array.length; i++) {
@@ -93,10 +113,22 @@ const option = function(details){
 	this.interest = interest;
 	this.tir = 0;
 	this.vpn = 0;
+	this.vpb = 0; //Valor presente beneficio
+	this.vpc = 0; //Valor presente costo.
+	this.coeficient = 0; //The coeficient of vpb/vpc
 	this.vida = details.vida;
 	this.name = details.name;
 	this.details = details;
 	this.expand = expand;
+	this.set_differences = function(){
+		for(let i = 0; i<this.details.ingresos.length;i++){
+			this.vpb += get_present(this.details.ingresos[i],this.interest,i);
+		}
+		for(let i = 0; i<this.details.egresos.length;i++){
+			this.vpc += get_present(this.details.egresos[i],this.interest,i);
+		}
+		this.coeficient = this.vpb/this.vpc;
+	}
 	this.calculate_tir = function(){
 		//Alright, this function takes the current vpn and finds its tir.
 		const step = 0.05;
@@ -168,7 +200,7 @@ function calculate_vaue(details,interest,debug = false){
 	if(debug)console.log("VAUE = "+ren);
 	return ren;
 }
-const opts = [];
+let opts = [];
 const option_lives =[];
 for(let i = 0; i<options.length; i++){
 	const opt = options[i];
@@ -182,15 +214,41 @@ function indicate_best_option(option) {
 	console.log("VAUE = "+option.vaue);
 	console.log("TIR = "+option.tir);
 }
+function analisis_beneficio_costo_incremental(){
+	//First thing first, order the opts array by
+	console.log("Analisis Beneficio - Costo incremental : -------");
+	opts = shellSort(opts);
+	opts = opts.reverse();
+	let table = [];
+	for (let i = opts.length-1; i>0;i--){
+		let b = opts[i];
+		let a = opts[i-1];
+		let entry = {};
+		entry["dif_vpb"] = a.vpb - b.vpb;
+		entry["dif_vpc"] = a.vpc - b.vpc;
+		entry["title"] = a.name +" - "+b.name;
+		entry["vpb_over_vpc"] = entry.dif_vpb/entry.dif_vpc;
+		table.push(entry);
+	}
+	for (let i = 0; i<table.length;i++){
+		let entry = table[i];
+		console.log(";-------------------------------------");
+		for (let j = 0; j<Object.keys(entry).length;j++){
+			console.log(Object.keys(entry)[j]+" = "+entry[Object.keys(entry)[j] ]);
+		}
+		console.log(";-------------------------------------");
+	}
+}
+
 const period = option_lives.reduce(lcm);
 //Alright, now we gotta scale the flows to the new period.
 console.log('Flow period (mcm): '+period);
 opts.forEach(opt=>{opt.expand(period)});
-opts.forEach(opt=>{opt.process()});
+opts.forEach(opt=>{opt.process();opt.set_differences();});
 const vpns =[];
 opts.forEach(opt=>{vpns.push(opt.vpn)});
 let best_option = get_max(vpns);
 best_option = opts[best_option];
 best_option.calculate_tir();
+analisis_beneficio_costo_incremental();
 indicate_best_option(best_option);
-

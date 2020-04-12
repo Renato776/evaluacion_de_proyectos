@@ -1,81 +1,126 @@
 {
-  "interest": 30,
+  "interest": 10,
   "options": [
     {
-      "name": "Opcion A",
-      "anualidad": 0,
+      "name": "1 nivel",
+      "anualidad": 200,
       "ingresos": [
         {
-          "valor": 50000,
+          "valor": 220,
           "ocurre": [
-            1
-          ]
-        },{
-          "valor": 125000,
-          "ocurre": [
-            2,3
+            7
           ]
         }
       ],
       "egresos": [
         {
-          "valor": 150000,
+          "valor": 1100,
           "ocurre": [
             0
           ]
         }
       ],
-      "vida": 3
-    },
-    {
-      "name": "Opcion B",
-      "anualidad": 0,
+      "vida": 7
+    },{
+      "name": "2 nivel",
+      "anualidad": 330,
       "ingresos": [
         {
-          "valor": 60000,
+          "valor": 360,
           "ocurre": [
-            1
-          ]
-        },{
-          "valor": 70000,
-          "ocurre": [
-            2
-          ]
-        },{
-          "valor": 80000,
-          "ocurre": [
-            3
-          ]
-        },{
-          "valor": 90000,
-          "ocurre": [
-            4
+            7
           ]
         }
       ],
       "egresos": [
         {
-          "valor": 165000,
+          "valor": 1800,
           "ocurre": [
             0
           ]
         }
       ],
-      "vida": 4
-    },
-    {
-      "name": "Opcion C",
-      "anualidad": 90000,
-      "ingresos": [],
+      "vida": 7
+    },{
+      "name": "3 nivel",
+      "anualidad": 470,
+      "ingresos": [
+        {
+          "valor": 500,
+          "ocurre": [
+            7
+          ]
+        }
+      ],
       "egresos": [
         {
-          "valor": 180000,
+          "valor": 2500,
           "ocurre": [
             0
           ]
         }
       ],
-      "vida": 6
+      "vida": 7
+    },{
+      "name": "4 nivel",
+      "anualidad": 670,
+      "ingresos": [
+        {
+          "valor": 720,
+          "ocurre": [
+            7
+          ]
+        }
+      ],
+      "egresos": [
+        {
+          "valor": 3600,
+          "ocurre": [
+            0
+          ]
+        }
+      ],
+      "vida": 7
+    },{
+      "name": "5 nivel",
+      "anualidad": 895,
+      "ingresos": [
+        {
+          "valor": 960,
+          "ocurre": [
+            7
+          ]
+        }
+      ],
+      "egresos": [
+        {
+          "valor": 4800,
+          "ocurre": [
+            0
+          ]
+        }
+      ],
+      "vida": 7
+    },{
+      "name": "6 nivel",
+      "anualidad": 985,
+      "ingresos": [
+        {
+          "valor": 1060,
+          "ocurre": [
+            7
+          ]
+        }
+      ],
+      "egresos": [
+        {
+          "valor": 5300,
+          "ocurre": [
+            0
+          ]
+        }
+      ],
+      "vida": 7
     }
   ]
 }
