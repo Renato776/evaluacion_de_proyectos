@@ -200,7 +200,7 @@ const option = function(details){
 		if(this.vpn<0){
 			a.i = this.interest;
 			a.v = this.vpn;
-			while(a.v<0){
+			while(a.v<0&&a.i>=0){
 				b.i = a.i;
 				b.v = a.v;
 				a.i = a.i - step;
@@ -209,7 +209,7 @@ const option = function(details){
 		}else{
 			b.i = this.interest;
 			b.v = this.vpn;
-			while(b.v>0){
+			while(b.v>0&&b.i<3){
 				a.i = b.i;
 				a.v = b.v;
 				b.i = b.i + step;
@@ -331,5 +331,5 @@ best_option = opts[best_option];
 best_option.calculate_tir();
 opts = shellSort(opts);
 analisis_beneficio_costo_incremental();
-indicate_best_option(best_option);
+//indicate_best_option(best_option);
 resumen();
