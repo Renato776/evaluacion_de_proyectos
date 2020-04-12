@@ -154,11 +154,14 @@ const option = function(details){
 			}
 		}
 		//Alright, now all we gotta do is get apply the formula:
+		console.log("************************************************************************");
+		console.log("***********************************  TIR  ******************************");
 		console.log("TIR = "+a.i+" + "+step+" * "+Math.abs(a.v)+"/"+(Math.abs(a.v)+Math.abs(b.v)));
 		let ans = a.i + step*a.v/(Math.abs(a.v)+Math.abs(b.v));
 		ans = ans*100;
 		console.log("TIR = "+ans);
 		this.tir = ans;
+		console.log("************************************************************************");
 	}
 	this.process = function(){
 		console.log("VPN for "+this.name+" :");
@@ -195,7 +198,7 @@ function calculate_vpn(details,interest,debug = false){
 	return positive - negative;
 }
 function calculate_vaue(details,interest,debug = false){
-	let vpn = calculate_vpn(details,interest);
+	let vpn = calculate_vpn(details,interest,true);
 	let ren = get_anuality(vpn,details.ingresos.length-1,interest,debug);
 	if(debug)console.log("VAUE = "+ren);
 	return ren;
@@ -209,6 +212,8 @@ for(let i = 0; i<options.length; i++){
 	option_lives.push(op.vida);
 }
 function indicate_best_option(option) {
+	console.log(";-----------------------------------------------------------------");
+	console.log(";------------------------Best Option------------------------------");
 	console.log("The best option is: "+option.name);
 	console.log("VPN = "+option.vpn);
 	console.log("VAUE = "+option.vaue);
@@ -216,7 +221,9 @@ function indicate_best_option(option) {
 }
 function analisis_beneficio_costo_incremental(){
 	//First thing first, order the opts array by
-	console.log("Analisis Beneficio - Costo incremental : -------");
+	console.log("------------------------------------------------------------");
+	console.log("----------- Analisis Beneficio - Costo incremental : -------");
+	console.log("------------------------------------------------------------");
 	opts = shellSort(opts);
 	opts = opts.reverse();
 	let table = [];
@@ -232,11 +239,11 @@ function analisis_beneficio_costo_incremental(){
 	}
 	for (let i = 0; i<table.length;i++){
 		let entry = table[i];
-		console.log(";-------------------------------------");
+		console.log(";-----------------------------------------------------------------");
 		for (let j = 0; j<Object.keys(entry).length;j++){
 			console.log(Object.keys(entry)[j]+" = "+entry[Object.keys(entry)[j] ]);
 		}
-		console.log(";-------------------------------------");
+		//console.log(";-----------------------------------------------------------------");
 	}
 }
 
