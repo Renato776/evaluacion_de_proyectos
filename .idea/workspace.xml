@@ -14,7 +14,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1aUtFnAIUDwtN43eeRWMnQKItMP" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -25,11 +29,17 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="12.13.1" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/index.js" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path" value="$APPLICATION_CONFIG_DIR$/node/node-v12.13.1-win-x64/node" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunManager">
-    <configuration name="index.js" type="NodeJSConfigurationType" nameIsGenerated="true" path-to-js-file="index.js" working-dir="$PROJECT_DIR$">
+    <configuration name="index.js" type="NodeJSConfigurationType" application-parameters="project.json" nameIsGenerated="true" path-to-js-file="index.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
   </component>
@@ -43,7 +53,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1586801898419</updated>
-      <workItem from="1586801900214" duration="49000" />
+      <workItem from="1586801900214" duration="1736000" />
     </task>
     <servers />
   </component>
@@ -51,13 +61,29 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="94" y="149" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586801948973">
+    <state x="94" y="149" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586804216178">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state x="94" y="149" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.984@0.0.1280.984" timestamp="1586801948973" />
+    <state x="94" y="149" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.984@0.0.1280.984" timestamp="1586804216178" />
     <state x="420" y="249" key="FileChooserDialogImpl" timestamp="1586801946657">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
     <state x="420" y="249" key="FileChooserDialogImpl/0.0.1280.984@0.0.1280.984" timestamp="1586801946657" />
+    <state width="1222" height="240" key="GridCell.Tab.0.bottom" timestamp="1586804235689">
+      <screen x="0" y="0" width="1280" height="984" />
+    </state>
+    <state width="1222" height="240" key="GridCell.Tab.0.bottom/0.0.1280.984@0.0.1280.984" timestamp="1586804235689" />
+    <state width="1222" height="240" key="GridCell.Tab.0.center" timestamp="1586804235689">
+      <screen x="0" y="0" width="1280" height="984" />
+    </state>
+    <state width="1222" height="240" key="GridCell.Tab.0.center/0.0.1280.984@0.0.1280.984" timestamp="1586804235689" />
+    <state width="1222" height="240" key="GridCell.Tab.0.left" timestamp="1586804235689">
+      <screen x="0" y="0" width="1280" height="984" />
+    </state>
+    <state width="1222" height="240" key="GridCell.Tab.0.left/0.0.1280.984@0.0.1280.984" timestamp="1586804235689" />
+    <state width="1222" height="240" key="GridCell.Tab.0.right" timestamp="1586804235689">
+      <screen x="0" y="0" width="1280" height="984" />
+    </state>
+    <state width="1222" height="240" key="GridCell.Tab.0.right/0.0.1280.984@0.0.1280.984" timestamp="1586804235689" />
   </component>
 </project>
