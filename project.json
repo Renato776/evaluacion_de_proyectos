@@ -36,6 +36,8 @@
       }],
       "egresos": [],
       "inicial": 300054,
-      "salvamento": 50}
+      "salvamento": 50,
+      "vida": 8
+    }
   ]
 }
