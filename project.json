@@ -8,6 +8,9 @@
         "valor": 350,
         "ocurre": [1]
       },{
+		"valor":10,
+		"ocurre": 7
+	  },{
         "valor": 450,
         "ocurre": [2]
       },{
@@ -17,9 +20,10 @@
       "egresos": [{
         "valor": 5025,
         "ocurre": [4]
-      }],
-      "inicial": 125000,
-      "salvamento": 0,
+      },{
+		"valor":125000,
+		"ocurre" : [0]
+	  }]
       "vida": 7
     },{
       "name": "Opcion B",
@@ -33,10 +37,14 @@
       },{
         "valor": 4451.35,
         "ocurre": [3,6,5,1,2]
-      }],
-      "egresos": [],
-      "inicial": 300054,
-      "salvamento": 50,
+      },{
+		"valor": 50,
+		"ocurre":8
+	  }],
+      "egresos": [{
+		"valor": 300054,
+		"ocurre":[0]
+	  }],
       "vida": 8
     }
   ]
