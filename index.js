@@ -1,5 +1,16 @@
 //const my_args = process.argv.slice(2);
 const exactness = 4;
+const Printing = {
+	output: "output",
+	set_text:function(text){
+		document.getElementById(this.output).value = text;
+	},
+	printLog:function(text){
+		let s = get_source(this.output);
+		s+=text+"\n";
+		this.set_text(s);
+	}
+};
 function format_cell(cell_width,entry){
 	cell_width = cell_width-2;
 	let formatted_entry = "|";
@@ -17,7 +28,7 @@ function format_cell(cell_width,entry){
 	return formatted_entry;
 }
 function format_title(size,title) {
-	console.log(format_cell(size,title));
+	Printing.printLog(format_cell(size,title));
 }
 function format_row(row,size){
 	let formatted_row = "";
@@ -26,7 +37,7 @@ function format_row(row,size){
 		let formatted_entry = format_cell(Math.floor(size/row.length),entry);
 		formatted_row+=formatted_entry;
 	}
-	console.log(formatted_row);
+	Printing.printLog(formatted_row);
 }
 function print_object_header(object,size){
 	let header = [];
@@ -43,9 +54,9 @@ function print_object_body(object,size){
 	format_row(entry_row,size);
 }
 function print_table_title(text,size){
-	console.log(fill_string(size,'-'));
+	Printing.printLog(fill_string(size,'-'));
 	format_title(size,text);
-	console.log(fill_string(size,'-'));
+	Printing.printLog(fill_string(size,'-'));
 
 }
 function print_object_list(table,size){
@@ -65,21 +76,13 @@ function fill_string(size,content) {
 function truncate(number){
 	return Number(number.toFixed(exactness));
 }
-if(my_args.length==0){
-    console.log('You must specify the path to your project. Usage: node index.js PATH');
-    process.exit(1);
+function get_source(element_id){
+	let s = document.getElementById(element_id).value;
+	return s;
 }
-//const project_path = my_args[0];
-//const fs = require('fs');
-const project = JSON.parse(get_source('project'));
-const interest = project.interest/100;
-const options = project.options;
-const gcd = (a, b) => a ? gcd(b % a, a) : b;
-const lcm = (a, b) => a * b / gcd(a, b);
 function shellSort(arr) {
 	var len  = arr.length;
 	var gapSize =  Math.floor(len/2);
-
 	while(gapSize > 0){
 		for(var i = gapSize; i < len; i++) {
 
@@ -110,7 +113,6 @@ function get_max(array) {
 	}
 	return biggest;
 }
-const answers = [];
 function sparse_anuality(anualidad,array){
 	for (let i = 1; i<array.length; i++){
 		array[i] = array[i] + anualidad;
@@ -119,18 +121,18 @@ function sparse_anuality(anualidad,array){
 }
 function build_flow(array,vida){
 	//Given an array which could be either ingresos or egresos.
-		let answer = [];
-		for(let i = 0; i<vida+1; i++){
-			answer.push(0);
+	let answer = [];
+	for(let i = 0; i<vida+1; i++){
+		answer.push(0);
+	}
+	for(let i = 0; i<array.length;i++){
+		let entry = array[i]; //Entry is an object of ocurre array and valor value.
+		for(let j = 0; j<entry.ocurre.length;j++){
+			let ocurrence = entry.ocurre[j];
+			answer[ocurrence] = answer[ocurrence]+entry.valor;
 		}
-		for(let i = 0; i<array.length;i++){
-			let entry = array[i]; //Entry is an object of ocurre array and valor value.			
-			for(let j = 0; j<entry.ocurre.length;j++){
-				let ocurrence = entry.ocurre[j];
-				answer[ocurrence] = answer[ocurrence]+entry.valor;
-			}
-		}
-		return answer;
+	}
+	return answer;
 }
 const details = function(anualidad,ingresos,egresos,vida,name){
 	//This function takes the anuality,ingresos,egresos and builds an effective flow based on them and vida.
@@ -140,7 +142,7 @@ const details = function(anualidad,ingresos,egresos,vida,name){
 	this.vida = vida;
 	if(anualidad<0){
 		this.egresos = sparse_anuality(anualidad,this.egresos);
-	}else{		
+	}else{
 		this.ingresos = sparse_anuality(anualidad,this.ingresos);
 	}
 }
@@ -161,7 +163,8 @@ function expand_array(subject,period,cycles,vida) {
 	}
 	return [...new_flow];
 }
-
+const gcd = (a, b) => a ? gcd(b % a, a) : b;
+const lcm = (a, b) => a * b / gcd(a, b);
 function expand(period){
 	if(this.vida == period)return; //No need to expand.
 	const cycles = period/this.vida;
@@ -170,7 +173,7 @@ function expand(period){
 }
 const option = function(details){
 	//this.vpn = calculate_vpn(details,interest);
-	console.log('VAUE for option '+details.name+":");
+	Printing.printLog('VAUE for option '+details.name+":");
 	this.vaue = calculate_vaue(details,interest,true);
 	this.interest = interest;
 	this.tir = 0;
@@ -216,19 +219,18 @@ const option = function(details){
 			}
 		}
 		//Alright, now all we gotta do is get apply the formula:
-		console.log("************************************************************************");
-		console.log("***********************************  TIR  ******************************");
-		console.log("TIR = "+a.i+" + "+step+" * "+Math.abs(a.v)+"/"+(Math.abs(a.v)+Math.abs(b.v)));
+		print_table_title("TIR",general_size);
+		Printing.printLog("TIR = "+a.i+" + "+step+" * "+Math.abs(a.v)+"/"+(Math.abs(a.v)+Math.abs(b.v)));
 		let ans = a.i + step*a.v/(Math.abs(a.v)+Math.abs(b.v));
 		ans = ans*100;
-		console.log("TIR = "+ans);
+		Printing.printLog("TIR = "+ans);
 		this.tir = ans;
-		console.log("************************************************************************");
-	}
+		Printing.printLog(fill_string(general_size,'-'));
+	};
 	this.process = function(){
-		console.log("VPN for "+this.name+" :");
+		Printing.printLog("VPN for "+this.name+" :");
 		this.vpn = calculate_vpn(this.details,this.interest,true);
-		console.log("VPN = "+this.vpn);
+		Printing.printLog("VPN = "+this.vpn);
 	}
 }
 function get_present(future,interest,n){
@@ -238,7 +240,7 @@ function get_anuality(present,n,interest,debug = false){
 	let a = (interest*truncate(Math.pow(1+interest,n)))/(truncate(Math.pow(1+interest,n))-1);
 	a = truncate(a);
 	if(debug){
-		console.log('VAUE = '+truncate(present)+"("+a+")");
+		Printing.printLog('VAUE = '+truncate(present)+"("+a+")");
 	}
 	return truncate(present)*a;
 }
@@ -255,35 +257,26 @@ function calculate_vpn(details,interest,debug = false){
 		negative += get_present(egresos[i],interest,i);
 	}
 	if(debug){
-		console.log('VPN = '+positive+' - '+negative);
+		Printing.printLog('VPN = '+positive+' - '+negative);
 	}
 	return positive - negative;
 }
 function calculate_vaue(details,interest,debug = false){
 	let vpn = calculate_vpn(details,interest,true);
 	let ren = get_anuality(vpn,details.ingresos.length-1,interest,debug);
-	if(debug)console.log("VAUE = "+ren);
+	if(debug)Printing.printLog("VAUE = "+ren);
 	return ren;
 }
-let opts = [];
-const option_lives =[];
-for(let i = 0; i<options.length; i++){
-	const opt = options[i];
-	let op = new option(new details(opt.anualidad,opt.ingresos,opt.egresos,opt.vida,opt.name));
-	opts.push(op);
-	option_lives.push(op.vida);
-}
 function indicate_best_option(option) {
-	console.log(";-----------------------------------------------------------------");
-	console.log(";------------------------Best Option------------------------------");
-	console.log("The best option is: "+option.name);
-	console.log("VPN = "+option.vpn);
-	console.log("VAUE = "+option.vaue);
-	console.log("TIR = "+option.tir);
+	Printing.printLog(";-----------------------------------------------------------------");
+	Printing.printLog(";------------------------Best Option------------------------------");
+	Printing.printLog("The best option is: "+option.name);
+	Printing.printLog("VPN = "+option.vpn);
+	Printing.printLog("VAUE = "+option.vaue);
+	Printing.printLog("TIR = "+option.tir);
 }
 function resumen(){
-	let table_size = 85;
-	print_table_title("Resumen",table_size);
+	print_table_title("Resumen",general_size);
 	let useFull_data = [];
 	for (let i = 0; i<opts.length;i++){
 		let opt = opts[i];
@@ -297,12 +290,11 @@ function resumen(){
 		entry["vpb/vpc"] = opt.coeficient;
 		useFull_data.push(entry);
 	}
-	print_object_list(useFull_data,table_size);
+	print_object_list(useFull_data,general_size);
 }
 function analisis_beneficio_costo_incremental(){
 	//First thing first, order the opts array by
-	let row_width = 100;
-	print_table_title("Analisis Beneficio Costo incremental",row_width);
+	print_table_title("Analisis Beneficio Costo incremental",general_size);
 	let table = [];
 	for (let i = opts.length-1; i>0;i--){
 		let b = opts[i];
@@ -315,20 +307,37 @@ function analisis_beneficio_costo_incremental(){
 		entry["Justifica"] = entry["vpb/vpc"] >= 1;
 		table.push(entry);
 	}table = table.reverse();
-	print_object_list(table,row_width);
+	print_object_list(table,general_size);
 }
-
-const period = option_lives.reduce(lcm);
-//Alright, now we gotta scale the flows to the new period.
-console.log('Flow period (mcm): '+period);
-opts.forEach(opt=>{opt.expand(period)});
-opts.forEach(opt=>{opt.process();opt.set_differences();});
-const vpns =[];
-opts.forEach(opt=>{vpns.push(opt.vpn)});
-let best_option = get_max(vpns);
-best_option = opts[best_option];
-best_option.calculate_tir();
-opts = shellSort(opts);
-analisis_beneficio_costo_incremental();
-indicate_best_option(best_option);
-resumen();
+let project;
+let interest;
+let options ;
+let opts;
+let option_lives =[];
+const general_size = 120;
+function perform_analysis() {
+	opts = [];
+	project = JSON.parse(get_source('source'));
+	interest = project.interest/100;
+	options = project.options;
+	option_lives =[];
+	for(let i = 0; i<options.length; i++){
+		const opt = options[i];
+		let op = new option(new details(opt.anualidad,opt.ingresos,opt.egresos,opt.vida,opt.name));
+		opts.push(op);
+		option_lives.push(op.vida);
+	}
+	const period = option_lives.reduce(lcm);
+	print_table_title('Flow period (mcm): '+period,general_size);
+	opts.forEach(opt=>{opt.expand(period)});
+	opts.forEach(opt=>{opt.process();opt.set_differences();});
+	const vpns =[];
+	opts.forEach(opt=>{vpns.push(opt.vpn)});
+	let best_option = get_max(vpns);
+	best_option = opts[best_option];
+	best_option.calculate_tir();
+	opts = shellSort(opts);
+	analisis_beneficio_costo_incremental();
+	resumen();
+	//indicate_best_option(best_option);
+}

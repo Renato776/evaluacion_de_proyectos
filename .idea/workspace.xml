@@ -20,6 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab6b1a15-9e4c-46bd-90a0-b439f731c7a3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
     </list>
@@ -32,6 +33,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -45,6 +47,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -84,7 +87,7 @@
       <updated>1586801898419</updated>
       <workItem from="1586801900214" duration="1880000" />
       <workItem from="1586877862141" duration="3858000" />
-      <workItem from="1586891216255" duration="254000" />
+      <workItem from="1586891216255" duration="1918000" />
     </task>
     <servers />
   </component>
@@ -195,20 +198,13 @@
     </state>
     <state width="1222" height="297" key="GridCell.Tab.3.right/0.0.1280.984@0.0.1280.984" timestamp="1586880966584" />
     <state width="776" height="135" key="GridCell.Tab.3.right/0.27.800.573@0.27.800.573" timestamp="1586707863309" />
+    <state x="285" y="82" width="709" height="819" key="find.popup" timestamp="1586892105509">
+      <screen x="0" y="0" width="1280" height="984" />
+    </state>
+    <state x="285" y="82" width="709" height="819" key="find.popup/0.0.1280.984@0.0.1280.984" timestamp="1586892105509" />
     <state x="63" y="26" width="672" height="678" key="search.everywhere.popup" timestamp="1586706332770">
       <screen x="0" y="27" width="800" height="573" />
     </state>
     <state x="63" y="26" width="672" height="678" key="search.everywhere.popup/0.27.800.573@0.27.800.573" timestamp="1586706332770" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/index.js</url>
-          <line>14</line>
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
