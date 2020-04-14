@@ -137,7 +137,7 @@ const option = function(details){
 		if(this.vpn<0){
 			a.i = this.interest;
 			a.v = this.vpn;
-			while(b.v<0){
+			while(a.v<0){
 				b.i = a.i;
 				b.v = a.v;
 				a.i = a.i - step;
