@@ -1,5 +1,4 @@
-const my_args = process.argv.slice(2);
-const row_width = 25;
+//const my_args = process.argv.slice(2);
 const exactness = 4;
 function format_cell(cell_width,entry){
 	cell_width = cell_width-2;
@@ -70,9 +69,9 @@ if(my_args.length==0){
     console.log('You must specify the path to your project. Usage: node index.js PATH');
     process.exit(1);
 }
-const project_path = my_args[0];
-const fs = require('fs');
-const project = JSON.parse(fs.readFileSync(project_path));
+//const project_path = my_args[0];
+//const fs = require('fs');
+const project = JSON.parse(get_source('project'));
 const interest = project.interest/100;
 const options = project.options;
 const gcd = (a, b) => a ? gcd(b % a, a) : b;
