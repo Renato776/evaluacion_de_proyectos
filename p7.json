@@ -1,0 +1,38 @@
+{
+  "interest": 30,
+  "options": [
+    {
+      "name": "CONDI",
+      "anualidad": 6000,
+      "ingresos": [{
+        "valor": 3000,
+        "ocurre": [3]
+      }],
+      "egresos": [
+        {
+          "valor": 25000,
+          "ocurre": [
+            0
+          ]
+        }
+      ],
+      "vida": 3
+    },{
+      "name": "TORRO",
+      "anualidad": 52500,
+      "ingresos": [{
+        "valor": 150000,
+        "ocurre": [4]
+      }],
+      "egresos": [
+        {
+          "valor": 130000,
+          "ocurre": [
+            0
+          ]
+        }
+      ],
+      "vida": 4
+    }
+  ]
+}

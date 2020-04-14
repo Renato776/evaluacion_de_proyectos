@@ -1,0 +1,62 @@
+{
+  "interest": 12,
+  "options": [
+    {
+      "name": "Aplicacion en terreno",
+      "anualidad": -95000,
+      "ingresos": [{
+        "valor": 25000,
+        "ocurre": [3]
+      }],
+      "egresos": [
+        {
+          "valor": 130000,
+          "ocurre": [
+            0
+          ]
+        }
+      ],
+      "vida": 3
+    },{
+      "name": "Incineracion",
+      "anualidad": -60000,
+      "ingresos": [{
+        "valor": 300000,
+        "ocurre": [4]
+      }],
+      "egresos": [
+        {
+          "valor": 900000,
+          "ocurre": [
+            0
+          ]
+        }
+      ],
+      "vida": 4
+    },{
+      "name": "Contrato",
+      "anualidad": 0,
+      "ingresos": [],
+      "egresos": [{
+        "valor": 120000,
+        "ocurre": [1,2]
+      },{
+        "valor": 144000,
+        "ocurre": [3,4]
+      },{
+        "valor": 172800,
+        "ocurre": [5,6]
+      },{
+        "valor": 207360,
+        "ocurre": [7,8]
+      },{
+        "valor": 248832,
+        "ocurre": [9,10]
+      },{
+        "valor": 298598.4,
+        "ocurre": [11,12]
+      }],
+      "vida": 12
+    }
+  ]
+}

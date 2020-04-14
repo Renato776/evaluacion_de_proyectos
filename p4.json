@@ -1,0 +1,48 @@
+{
+  "interest": 8,
+  "options": [
+    {
+      "name": "Metodo A",
+      "anualidad": -9000,
+      "ingresos": [],
+      "egresos": [
+        {
+          "valor": 40000,
+          "ocurre": [
+            0
+          ]
+        }
+      ],
+      "vida": 2
+    },{
+      "name": "Metodo B",
+      "anualidad": -6000,
+      "ingresos": [],
+      "egresos": [
+        {
+          "valor": 80000,
+          "ocurre": [
+            0
+          ]
+        }
+      ],
+      "vida": 4
+    },{
+      "name": "Metodo C",
+      "anualidad": -4000,
+      "ingresos": [{
+        "valor": 12000,
+        "ocurre": [8]
+      }],
+      "egresos": [
+        {
+          "valor": 130000,
+          "ocurre": [
+            0
+          ]
+        }
+      ],
+      "vida": 8
+    }
+  ]
+}

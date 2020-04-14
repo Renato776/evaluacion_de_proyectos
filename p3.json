@@ -1,0 +1,32 @@
+{
+  "interest": 12,
+  "options": [
+    {
+      "name": "maquina A",
+      "anualidad": -28000,
+      "ingresos": [],
+      "egresos": [
+        {
+          "valor": 42000,
+          "ocurre": [
+            0
+          ]
+        }
+      ],
+      "vida": 4
+    },{
+      "name": "Maquina B",
+      "anualidad": -17000,
+      "ingresos": [],
+      "egresos": [
+        {
+          "valor": 51000,
+          "ocurre": [
+            0
+          ]
+        }
+      ],
+      "vida": 4
+    }
+  ]
+}

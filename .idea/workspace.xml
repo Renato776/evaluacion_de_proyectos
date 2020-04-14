@@ -20,7 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab6b1a15-9e4c-46bd-90a0-b439f731c7a3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/p2.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/p3.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/p4.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/p5.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/p6.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/p6b.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/p7.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,8 +65,16 @@
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\servilleta11\Documents\GitHub\evaluacion_de_proyectos" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="index.js" type="NodeJSConfigurationType" application-parameters="project.json" nameIsGenerated="true" path-to-js-file="index.js" working-dir="$PROJECT_DIR$">
+      <method v="2" />
+    </configuration>
+    <configuration name="index.js" type="NodeJSConfigurationType" application-parameters="project.json" path-to-node="$APPLICATION_CONFIG_DIR$/node/node-v12.13.1-win-x64/node" nameIsGenerated="true" path-to-js-file="index.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
   </component>
@@ -74,48 +89,50 @@
       <option name="presentableId" value="Default" />
       <updated>1586801898419</updated>
       <workItem from="1586801900214" duration="1880000" />
+      <workItem from="1586877862141" duration="2826000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="94" y="149" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586804216178">
+    <state x="94" y="149" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586878011547">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state x="94" y="149" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.984@0.0.1280.984" timestamp="1586804216178" />
-    <state x="420" y="249" key="FileChooserDialogImpl" timestamp="1586801946657">
+    <state x="94" y="149" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.984@0.0.1280.984" timestamp="1586878011547" />
+    <state x="420" y="249" key="FileChooserDialogImpl" timestamp="1586877985277">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state x="420" y="249" key="FileChooserDialogImpl/0.0.1280.984@0.0.1280.984" timestamp="1586801946657" />
-    <state width="1222" height="240" key="GridCell.Tab.0.bottom" timestamp="1586804416377">
+    <state x="420" y="249" key="FileChooserDialogImpl/0.0.1280.984@0.0.1280.984" timestamp="1586877985277" />
+    <state width="1222" height="240" key="GridCell.Tab.0.bottom" timestamp="1586878012930">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state width="1222" height="240" key="GridCell.Tab.0.bottom/0.0.1280.984@0.0.1280.984" timestamp="1586804416377" />
-    <state width="1222" height="240" key="GridCell.Tab.0.center" timestamp="1586804416376">
+    <state width="1222" height="240" key="GridCell.Tab.0.bottom/0.0.1280.984@0.0.1280.984" timestamp="1586878012930" />
+    <state width="1222" height="240" key="GridCell.Tab.0.center" timestamp="1586878012929">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state width="1222" height="240" key="GridCell.Tab.0.center/0.0.1280.984@0.0.1280.984" timestamp="1586804416376" />
-    <state width="1222" height="240" key="GridCell.Tab.0.left" timestamp="1586804416376">
+    <state width="1222" height="240" key="GridCell.Tab.0.center/0.0.1280.984@0.0.1280.984" timestamp="1586878012929" />
+    <state width="1222" height="240" key="GridCell.Tab.0.left" timestamp="1586878012928">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state width="1222" height="240" key="GridCell.Tab.0.left/0.0.1280.984@0.0.1280.984" timestamp="1586804416376" />
-    <state width="1222" height="240" key="GridCell.Tab.0.right" timestamp="1586804416377">
+    <state width="1222" height="240" key="GridCell.Tab.0.left/0.0.1280.984@0.0.1280.984" timestamp="1586878012928" />
+    <state width="1222" height="240" key="GridCell.Tab.0.right" timestamp="1586878012929">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state width="1222" height="240" key="GridCell.Tab.0.right/0.0.1280.984@0.0.1280.984" timestamp="1586804416377" />
-
+    <state width="1222" height="240" key="GridCell.Tab.0.right/0.0.1280.984@0.0.1280.984" timestamp="1586878012929" />
   </component>
 </project>

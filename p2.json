@@ -1,0 +1,32 @@
+{
+  "interest": 15,
+  "options": [
+    {
+      "name": "Interno",
+      "anualidad": 9000,
+      "ingresos": [
+        {
+          "valor": 2000,
+          "ocurre": [
+            5
+          ]
+        }
+      ],
+      "egresos": [
+        {
+          "valor": 30300,
+          "ocurre": [
+            0
+          ]
+        }
+      ],
+      "vida": 5
+    },{
+      "name": "Contrato",
+      "anualidad": 1100,
+      "ingresos": [],
+      "egresos": [],
+      "vida": 5
+    }
+  ]
+}

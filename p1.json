@@ -1,0 +1,66 @@
+{
+  "interest": 10,
+  "options": [
+    {
+      "name": "A base de electricidad",
+      "anualidad": -900,
+      "ingresos": [
+        {
+          "valor": 200,
+          "ocurre": [
+            6
+          ]
+        }
+      ],
+      "egresos": [
+        {
+          "valor": 4500,
+          "ocurre": [
+            0
+          ]
+        }
+      ],
+      "vida": 6
+    },{
+      "name": "A base de gas",
+      "anualidad": -700,
+      "ingresos": [
+        {
+          "valor": 350,
+          "ocurre": [
+            6
+          ]
+        }
+      ],
+      "egresos": [
+        {
+          "valor": 3500,
+          "ocurre": [
+            0
+          ]
+        }
+      ],
+      "vida": 6
+    },{
+      "name": "A base de energia solar",
+      "anualidad": -50,
+      "ingresos": [
+        {
+          "valor": 100,
+          "ocurre": [
+            6
+          ]
+        }
+      ],
+      "egresos": [
+        {
+          "valor": 6000,
+          "ocurre": [
+            0
+          ]
+        }
+      ],
+      "vida": 6
+    }
+  ]
+}
