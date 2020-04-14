@@ -1,0 +1,91 @@
+{
+  "interest": 0.025,
+  "options": [
+    {
+      "name": "Opcion A",
+      "anualidad": 300,
+      "ingresos": [
+        {
+          "valor": 350,
+          "ocurre": [
+            1
+          ]
+        },
+        {
+          "valor": 10,
+          "ocurre": 7
+        },
+        {
+          "valor": 450,
+          "ocurre": [
+            2
+          ]
+        },
+        {
+          "valor": 1500,
+          "ocurre": [
+            3,
+            6,
+            5
+          ]
+        }
+      ],
+      "egresos": [
+        {
+          "valor": 5025,
+          "ocurre": [
+            4
+          ]
+        },
+        {
+          "valor": 125000,
+          "ocurre": [
+            0
+          ]
+        }
+      ],
+      "vida": 7
+    },
+    {
+      "name": "Opcion B",
+      "anualidad": -8745,
+      "ingresos": [
+        {
+          "valor": 1800,
+          "ocurre": [
+            1
+          ]
+        },
+        {
+          "valor": 13.45,
+          "ocurre": [
+            2
+          ]
+        },
+        {
+          "valor": 4451.35,
+          "ocurre": [
+            3,
+            6,
+            5,
+            1,
+            2
+          ]
+        },
+        {
+          "valor": 50,
+          "ocurre": 8
+        }
+      ],
+      "egresos": [
+        {
+          "valor": 300054,
+          "ocurre": [
+            0
+          ]
+        }
+      ],
+      "vida": 8
+    }
+  ]
+}
