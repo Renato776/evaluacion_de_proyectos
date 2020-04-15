@@ -6,7 +6,7 @@ const Printing = {
 		document.getElementById(this.output).value = text;
 	},
 	printLog:function(text){
-		let s = get_source(this.output);
+		let s = document.getElementById(this.output).value;
 		s+=text+"\n";
 		this.set_text(s);
 	}
@@ -77,7 +77,7 @@ function truncate(number){
 	return Number(number.toFixed(exactness));
 }
 function get_source(element_id){
-	let s = document.getElementById(element_id).value;
+	let s = editor.getValue();
 	return s;
 }
 function shellSort(arr) {
@@ -202,7 +202,7 @@ const option = function(details){
 		if(this.vpn<0){
 			a.i = this.interest;
 			a.v = this.vpn;
-			while(a.v<0){
+			while(a.v<0&&a.i>=0){
 				b.i = a.i;
 				b.v = a.v;
 				a.i = a.i - step;
@@ -211,7 +211,7 @@ const option = function(details){
 		}else{
 			b.i = this.interest;
 			b.v = this.vpn;
-			while(b.v>0){
+			while(b.v>0&&b.i<5){
 				a.i = b.i;
 				a.v = b.v;
 				b.i = b.i + step;
@@ -223,8 +223,14 @@ const option = function(details){
 		Printing.printLog("TIR = "+a.i+" + "+step+" * "+Math.abs(a.v)+"/"+(Math.abs(a.v)+Math.abs(b.v)));
 		let ans = a.i + step*a.v/(Math.abs(a.v)+Math.abs(b.v));
 		ans = ans*100;
+		if(b.i<5){
 		Printing.printLog("TIR = "+ans);
 		this.tir = ans;
+		}
+		else {
+		Printing.printLog("TIR = Infinity");
+		this.tir = Infinity;
+		}
 		Printing.printLog(fill_string(general_size,'-'));
 	};
 	this.process = function(){

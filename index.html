@@ -3,10 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <title>Evalucacion de Proyectos</title>
+    <link rel=stylesheet href="CodeMirror/lib/codemirror.css">
+    <link rel=stylesheet href="CodeMirror/doc/docs.css">
+    <script src="CodeMirror/lib/codemirror.js"></script>
+    <script src="CodeMirror/mode/javascript/javascript.js"></script>
+    <script src="CodeMirror/addon/edit/matchbrackets.js"></script>
 </head>
 <body>
 <h1>Evaluacion de opciones</h1>
-<textarea cols = "130" rows = "30" id = "source"></textarea>
+<textarea id=source cols = "102" rows = "30">
+{
+  "interest": 10,
+  "options": [
+    {
+      "name": "electricidad",
+      "anualidad": -900,
+      "ingresos": [
+        {
+          "valor": 200,
+          "ocurre": [
+            6
+          ]
+        }
+      ],
+      "egresos": [
+        {
+          "valor": 4500,
+          "ocurre": [
+            0
+          ]
+        }
+      ],
+      "vida": 6
+    },{
+      "name": "gas",
+      "anualidad": -700,
+      "ingresos": [
+        {
+          "valor": 350,
+          "ocurre": [
+            6
+          ]
+        }
+      ],
+      "egresos": [
+        {
+          "valor": 3500,
+          "ocurre": [
+            0
+          ]
+        }
+      ],
+      "vida": 6
+    },{
+      "name": "solar",
+      "anualidad": -50,
+      "ingresos": [
+        {
+          "valor": 100,
+          "ocurre": [
+            6
+          ]
+        }
+      ],
+      "egresos": [
+        {
+          "valor": 6000,
+          "ocurre": [
+            0
+          ]
+        }
+      ],
+      "vida": 6
+    }
+  ]
+}
+</textarea>
+<script>
+    let editor = CodeMirror.fromTextArea(document.getElementById("source"), {
+        lineNumbers: true,
+        mode: "text/javascript",
+        matchBrackets: true
+    });
+</script>
 <br>
 <button onclick="perform_analysis()">Analizar</button>
 <br>
