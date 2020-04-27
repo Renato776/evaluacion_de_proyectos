@@ -19,10 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab6b1a15-9e4c-46bd-90a0-b439f731c7a3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
-    </list>
+    <list default="true" id="ab6b1a15-9e4c-46bd-90a0-b439f731c7a3" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -84,11 +81,12 @@
       <updated>1586801898419</updated>
       <workItem from="1586801900214" duration="1880000" />
       <workItem from="1586877862141" duration="3858000" />
+      <workItem from="1586716798776" duration="76000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -108,11 +106,11 @@
     </state>
     <state x="94" y="149" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.984@0.0.1280.984" timestamp="1586880787822" />
     <state x="0" y="27" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.800.573@0.27.800.573" timestamp="1586702036433" />
-    <state x="263" y="109" width="424" height="491" key="FileChooserDialogImpl" timestamp="1586702020552">
+    <state x="263" y="109" width="424" height="491" key="FileChooserDialogImpl" timestamp="1586716871951">
       <screen x="0" y="27" width="800" height="573" />
     </state>
     <state x="420" y="249" key="FileChooserDialogImpl/0.0.1280.984@0.0.1280.984" timestamp="1586877985277" />
-    <state x="263" y="109" width="424" height="491" key="FileChooserDialogImpl/0.27.800.573@0.27.800.573" timestamp="1586702020552" />
+    <state x="263" y="109" width="424" height="491" key="FileChooserDialogImpl/0.27.800.573@0.27.800.573" timestamp="1586716871951" />
     <state width="776" height="150" key="GridCell.Tab.0.bottom" timestamp="1586711444377">
       <screen x="0" y="27" width="800" height="573" />
     </state>
@@ -204,7 +202,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/index.js</url>
           <line>15</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="27" />
         </line-breakpoint>
       </breakpoints>
