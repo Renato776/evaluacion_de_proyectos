@@ -155,6 +155,7 @@ const invest_option = function (details_, inversion, salvamento, production, egr
 	this.flows = {};
 	this.options = undefined;
 	this.analyze= function (){
+		Printing.set_text('');
 		Printing.printLog(this.details.name);
 		/*This function will calculate all necessary data,
 		* build tables for each and print them.*/
@@ -212,11 +213,22 @@ const invest_option = function (details_, inversion, salvamento, production, egr
 		this.calculate_deprecation(SDD);
 		this.calculate_deprecation(SMARC_);
 		this.build_options();
-		Printing.printTitle('Diagramas de caja:');
+		Printing.printTitle('Analisis');
 		this.options.forEach(opt=>{
 			Printing.printTitle(opt.name);
 			opt.details.boxDiagram();
+			Printing.printSubTitle('VPN');
+			opt.calculate_vpn();
+			Printing.printSubTitle('VAUE');
+			opt.calculate_vaue();
+			Printing.printSubTitle('TIR');
+			opt.calculate_tir();
+			Printing.printSubTitle('B/C Simple')
+			opt.set_differences();
 		});
+		Printing.printTitle('Resumen');
+		resumen(this.options);
+		Printing.save_csv();
 	};
 	this.build_options = function(){
 	//THis method takes all the flows registered at the moment
@@ -307,6 +319,13 @@ const invest_option = function (details_, inversion, salvamento, production, egr
 };
 const Printing = {
 	output: "output",
+	save_csv:function(){
+		const text = document.getElementById(this.output).value;
+		const data = new Blob([text], {type: 'text/csv'});
+		const url = window.URL.createObjectURL(data);
+		document.getElementById('download_link').href = url;
+		document.getElementById('download_link').click();
+	},
 	set_text:function(text){
 		document.getElementById(this.output).value = text;
 	},

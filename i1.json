@@ -4,7 +4,7 @@
     "TMAR" : 25,
     "inflacion": 3.5,
     "costo de produccion por unidad" : 7.0025,
-    "unidades deproduccion": "libras",
+    "unidades de produccion": "libras",
     "moneda" : "Q",
     "ISR": 7
   },
