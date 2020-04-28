@@ -218,12 +218,11 @@ const invest_option = function (details_, inversion, salvamento, production, egr
 			Printing.printTitle(opt.name);
 			opt.details.boxDiagram();
 			Printing.printSubTitle('VPN');
-			opt.calculate_vpn();
+			opt.vpn = calculate_vpn(opt.details,opt.interest,true);
 			Printing.printSubTitle('VAUE');
-			opt.calculate_vaue();
+			opt.vaue = calculate_vaue(opt.details,opt.interest,true);
 			Printing.printSubTitle('TIR');
-			opt.calculate_tir();
-			Printing.printSubTitle('B/C Simple')
+			opt.calculate_tir(true);
 			opt.set_differences();
 		});
 		Printing.printTitle('Resumen');
@@ -246,8 +245,9 @@ const invest_option = function (details_, inversion, salvamento, production, egr
 				if(r<0)egresos[j] = Math.abs(r);
 				else ingresos[j] = Math.abs(r);
 			}
-			d.ingresos = ingresos;
-			d.egresos = egresos;
+			d.ingresos = d.ingresos_backup= ingresos;
+			d.egresos =d.egresos_backup= egresos;
+			d.interest = this.details["TMAR"];
 			this.options.push(new option(d));
 		}
 	};
@@ -319,6 +319,9 @@ const invest_option = function (details_, inversion, salvamento, production, egr
 };
 const Printing = {
 	output: "output",
+	printSubTitle:function(text){
+		format_title(Math.ceil(3*general_size/2),text);
+	},
 	save_csv:function(){
 		const text = document.getElementById(this.output).value;
 		const data = new Blob([text], {type: 'text/csv'});
@@ -404,27 +407,27 @@ const Printing = {
 	}
 };
 function format(v){
-	if(!isNaN(v))v = currency + (Math.round(v * 100) / 100);
-	return v;
+	if(!isNaN(v))return currency + (Math.round(v * 100) / 100);
+	return '"'+v+'"';
 }
-function format_cell(cell_width,entry){
+function format_cell(cell_width,entry,filler = ' '){
 	cell_width = cell_width-2;
 	let formatted_entry = "|";
 	if(entry.length==cell_width){
 		formatted_entry+=entry+"|";
 	}else if(entry.length<cell_width){
 		let filler_count = Math.floor((cell_width-entry.length)/2);
-		formatted_entry += fill_string(filler_count,' ');
+		formatted_entry += fill_string(filler_count,filler);
 		formatted_entry += entry;
-		formatted_entry += fill_string(cell_width - filler_count - entry.length,' ');
+		formatted_entry += fill_string(cell_width - filler_count - entry.length,filler);
 		formatted_entry+="|";
 	}else{
 		formatted_entry+=entry.substring(0,cell_width-1)+"-|";
 	}
 	return formatted_entry;
 }
-function format_title(size,title) {
-	Printing.printLog(format_cell(size,title));
+function format_title(size,title,filler = '-') {
+	Printing.printLog(format_cell(size,title,filler));
 }
 function format_row(row,size){
 	let formatted_row = "";
@@ -598,6 +601,8 @@ const details = function(anualidad,ingresos,egresos,vida,name){
 	this.name = name;
 	this.ingresos = build_flow(ingresos,vida);
 	this.egresos = build_flow(egresos,vida);
+	this.ingresos_backup = this.ingresos;
+	this.egresos_backup = this.egresos;
 	this.vida = vida;
 	this.anuality = anualidad; //Anuality keeps its sign.
 	if(anualidad<0){
@@ -675,7 +680,7 @@ const option = function(details){
 	//this.vpn = calculate_vpn(details,interest);
 	//this.vaue = calculate_vaue(details,interest,true);
 	this.vaue = 0;
-	this.interest = interest;
+	this.interest = details.interest;
 	this.tir = 0;
 	this.vpn = 0;
 	this.vpb = 0; //Valor presente beneficio
@@ -687,6 +692,7 @@ const option = function(details){
 	this.expand = expand;
 	this.is_best = false;
 	this.set_differences = function(){
+		this.vpb = this.vpc = 0;
 		for(let i = 0; i<this.details.ingresos.length;i++){
 			this.vpb += get_present(this.details.ingresos[i],this.interest,i);
 		}
@@ -695,7 +701,7 @@ const option = function(details){
 		}
 		this.coeficient = this.vpb/this.vpc;
 	}
-	this.calculate_tir = function(){
+	this.calculate_tir = function(debug = true){
 		//Alright, this function takes the current vpn and finds its tir.
 		const step = 0.05;
 		let a = {i:0,v:0};
@@ -719,30 +725,27 @@ const option = function(details){
 				b.v = calculate_vpn(this.details,b.i);
 			}
 		}
-		//Alright, now all we gotta do is get apply the formula:
-		print_table_title("TIR for "+this.name,general_size);
-		Printing.printLog("TIR = "+a.i+" + "+step+" * "+Math.abs(a.v)+"/"+(Math.abs(a.v)+Math.abs(b.v)));
+		//Alright, now all we gotta do is to apply the formula:
+		if(debug) Printing.printLog("TIR = "+a.i+" + "+step+" * "+Math.abs(a.v)+"/"+(Math.abs(a.v)+Math.abs(b.v)));
 		if(a.i<0){
-			Printing.printLog("TIR = N/A < 0");
+			if(debug)Printing.printLog("TIR = N/A < 0");
 			this.tir = 'N/A < 0';
 		}else{
 			let ans = a.i + step*a.v/(Math.abs(a.v)+Math.abs(b.v));
 			ans = ans*100;
 			if(b.i<5){
-				Printing.printLog("TIR = "+ans);
+				if(debug)Printing.printLog("TIR = "+ans);
 				this.tir = ans;
 			}
 			else {
-				Printing.printLog("TIR = Infinity");
+				if(debug)Printing.printLog("TIR = Infinity");
 				this.tir = Infinity;
 			}
 		}
-		Printing.printLog(fill_string(general_size,'-'));
 	};
 	this.process = function(){
-		Printing.printLog("VPN for "+this.name+" :");
 		this.vpn = calculate_vpn(this.details,this.interest,true);
-		Printing.printLog("VPN = "+this.vpn);
+		this.vaue = calculate_vaue(this.details,this.interest,true);
 	}
 }
 function get_present(future,interest,n){
@@ -750,51 +753,82 @@ function get_present(future,interest,n){
 }
 function get_anuality(present,n,interest,debug = false){
 	let a = (interest*Math.pow(1+interest,n))/(Math.pow(1+interest,n)-1);
-	if(debug){
-		Printing.printLog('VAUE = '+present+"("+a+")");
-	}
+	if(debug)Printing.printLog('VAUE = '+format(present)+"("+a+")");
 	return present*a;
 }
 function calculate_vpn(details,interest,debug = false){
-	//ALright, here all I have to do is to get every entry within details to present and add them together.
-	let positive  = 0;
-	let ingresos = details.ingresos;
-	for(let i = 0; i<ingresos.length;i++){
-		positive += get_present(ingresos[i],interest,i);
+	function extract_anuality(anuality,flow){
+		if(anuality==0)return flow;
+		for	(let i = 0; i<flow.length;i++){
+			flow[i] = flow[i] - anuality;
+		}
+		return anuality;
 	}
+	let ingresos_backup = [...details.ingresos];
+	let egresos_backup = [...details.egresos];
+	let procedure = 'VPN = ';
+	let anuality;
+	if(details.anuality!=0){
+		if(details.anuality<0)anuality = extract_anuality(Math.abs(details.anuality),details.egresos);
+		else anuality = extract_anuality(Math.abs(details.anuality),details.ingresos);
+	}else anuality = 0;
+	if(details.anuality<0)procedure += '-';
+	if(anuality!=0)procedure += anuality+'(P/A,'+(interest*100)+'%,'+(details.ingresos.length-1)+')';
+	procedure = debug_vpn(details.ingresos,details.egresos,procedure,interest);
+	details.ingresos = ingresos_backup;
+	details.egresos = egresos_backup;
+	let positive = 0;
 	let negative = 0;
-	let egresos = details.egresos;
-	for(let i = 0; i<egresos.length;i++){
-		negative += get_present(egresos[i],interest,i);
-	}
+	for(let i = 0; i<details.ingresos.length;i++)positive += get_present(details.ingresos[i],interest,i);
+	for(let i = 0; i<details.egresos.length;i++)negative += get_present(details.egresos[i],interest,i);
 	if(debug){
-		Printing.printLog('VPN = '+positive+' - '+negative);
+		Printing.printLog(format(procedure));
+		Printing.printLog('VPN = '+format(positive)+' - '+format(negative));
+		Printing.printLog('VPN =' +format(positive-negative));
 	}
 	return positive - negative;
 }
+function debug_vpn(ingresos,egresos,procedure,interest){
+	for(let i = 0; i<ingresos.length;i++){
+		if(ingresos[i]!=0)if(i!=0)procedure+=' +'+ingresos[i]+'(P/F,'+(interest*100)+'%,'+i+')';
+		else procedure += '+'+ingresos[i];
+	}
+	for(let i = 0; i<egresos.length;i++){
+		if(egresos[i]!=0)if(i!=0)procedure+=' -'+egresos[i]+'(P/F,'+(interest*100)+'%,'+i+')';
+		else procedure += '-'+egresos[i];
+	}
+	return procedure;
+}
 function calculate_vaue(details,interest,debug = false){
-	let vpn = calculate_vpn(details,interest,true);
+	details = clone(details);
+	details.ingresos = details.ingresos_backup;
+	details.egresos = details.egresos_backup;
+	let vida = details.vida;
+	let procedure = '"VAUE = ['
+	procedure = debug_vpn(details.ingresos,details.egresos,procedure,interest);
+	procedure += '] * (A/P,'+interest*100+'%,'+vida+')"';
+	if(debug)Printing.printLog(procedure);
+	let vpn = calculate_vpn(details,interest);
 	let ren = get_anuality(vpn,details.ingresos.length-1,interest,debug);
-	if(debug)Printing.printLog("VAUE = "+ren);
+	if(debug)Printing.printLog("VAUE = "+format(ren));
 	return ren;
 }
-function resumen(){
-	print_table_title("Resumen",general_size);
-	let useFull_data = [];
+function resumen(opts){
+	let useFull_data = {
+		name:[],vaue:[],vpn:[],tir:[],vpb:[],vpc:[],"vpb/vpc":[]
+	};
 	for (let i = 0; i<opts.length;i++){
 		let opt = opts[i];
-		let entry = {};
-		if(opt.is_best) entry["name"] = '*'+opt.name;
-			else entry["name"] = opt.name;
-		entry["vaue"] = opt.vaue;
-		entry["vpn"] = opt.vpn;
-		entry["tir"] = opt.tir;
-		entry["vpb"] = opt.vpb;
-		entry["vpc"] = opt.vpc;
-		entry["vpb/vpc"] = opt.coeficient;
-		useFull_data.push(entry);
+		if(opt.is_best) useFull_data["name"].push('*'+opt.name);
+			else useFull_data["name"].push(opt.name);
+		useFull_data["vaue"].push(opt.vaue);
+		useFull_data["vpn"].push(opt.vpn);
+		useFull_data["tir"].push(opt.tir);
+		useFull_data["vpb"].push(opt.vpb);
+		useFull_data["vpc"].push(opt.vpc);
+		useFull_data["vpb/vpc"].push(opt.coeficient);
 	}
-	print_object_list(useFull_data,general_size);
+	Printing.printTable(useFull_data,false,false);
 }
 function analisis_beneficio_costo_incremental(){
 	//First thing first, order the opts array by
