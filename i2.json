@@ -28,7 +28,7 @@
         "inflacion": 0,
         "costo de produccion por unidad" : 1,
         "unidades de produccion": "N/A",
-        "moneda" : "Q",
+        "moneda" : "$",
         "ISR": 7
       },
       "inversion": {

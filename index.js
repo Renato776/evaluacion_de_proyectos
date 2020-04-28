@@ -376,6 +376,7 @@ const Printing = {
 	printTitle:function(text){
 		this.printLog(fill_string(general_size,'*'));
 		this.printLog(text);
+		this.printLog(fill_string(general_size,'*'));
 	},
 	printString:function(text){
 		let s = document.getElementById(this.output).value;
