@@ -346,7 +346,7 @@ const invest_option = function (details_, inversion, salvamento, production, egr
 const Printing = {
 	output: "output",
 	printSubTitle:function(text){
-		format_title(Math.floor(3*general_size/4),text);
+		format_title(Math.floor(general_size-2),text);
 	},
 	save_csv:function(){
 		const text = document.getElementById(this.output).value;
