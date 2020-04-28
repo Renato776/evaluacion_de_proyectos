@@ -138,8 +138,8 @@ function multiply_constant(array,constant){
 	}
 	return array;
 }
-const invest_option = function(details,inversion,salvamento,production,egresos) {
-	this.details = details;
+const invest_option = function (details_, inversion, salvamento, production, egresos) {
+	this.details = details_;
 	currency = this.details["moneda"];
 	this.details.inflacion = this.details.inflacion/100;
 	this.details["TMAR"] = this.details["TMAR"]/100;
@@ -159,21 +159,21 @@ const invest_option = function(details,inversion,salvamento,production,egresos) 
 		/*This function will calculate all necessary data,
 		* build tables for each and print them.*/
 		const d = wrap_table(this.details);
-		Printing.printLog('Detalles');
+		Printing.printTitle('Detalles');
 		Printing.printTable(d,false,false);
-		Printing.printLog('Inversion Inicial');
+		Printing.printTitle('Inversion Inicial');
 		this.inversion["Total"] = [sum_transpose_unique_cells(this.inversion)];
 		Printing.printTable(this.inversion,true);
-		Printing.printLog('Valores de Salvamento');
+		Printing.printTitle('Valores de Salvamento');
 		this.salvamento["Total"]= [sum_transpose_unique_cells(this.salvamento)];
 		Printing.printTable(this.salvamento,true);
-		Printing.printLog('Ingresos:');
+		Printing.printTitle('Ingresos:');
 		this.vida = this.production[PRODUCCION_ESTIMADA].length;
 		this.production[INGRESOS_TOTALES] = multiply_arrays(this.production[PRODUCCION_ESTIMADA],
 			this.production[PRECIO_VENTA]);
 		let r = shift_table(this.production,1);
-		Printing.printTable(r,true);
-		Printing.printLog('Egresos');
+		Printing.printTable(r,true,false);
+		Printing.printTitle('Egresos');
 		this.spendings = {};
 		let production_costs = constant_array(this.details[COSTO_PRODUCCION_UNIDAD],this.vida);
 		let pc = production_costs.slice(1,production_costs.length);
@@ -211,11 +211,33 @@ const invest_option = function(details,inversion,salvamento,production,egresos) 
 		this.calculate_deprecation(LINEA_RECTA);
 		this.calculate_deprecation(SDD);
 		this.calculate_deprecation(SMARC_);
-		this.options = this.build_options();
+		this.build_options();
+		Printing.printTitle('Diagramas de caja:');
 		this.options.forEach(opt=>{
-			Printing.printLog(opt.name);
-			opt.boxDiagram();
+			Printing.printTitle(opt.name);
+			opt.details.boxDiagram();
 		});
+	};
+	this.build_options = function(){
+	//THis method takes all the flows registered at the moment
+		//And builds valid option objects.
+		const keys = Object.keys(this.flows);
+		this.options = [];
+		for (let i = 0; i<keys.length;i++){
+			let key = keys[i];
+			let d = new details(0,[],[],this.vida,key);
+			let f = this.flows[key];
+			let ingresos = constant_array(0,this.vida+1);
+			let egresos = constant_array(0,this.vida+1);
+			for (let j = 0; j<f.length;j++){
+				let r = f[j];
+				if(r<0)egresos[j] = Math.abs(r);
+				else ingresos[j] = Math.abs(r);
+			}
+			d.ingresos = ingresos;
+			d.egresos = egresos;
+			this.options.push(new option(d));
+		}
 	};
 	this.deprecate = function(base,n,method,key ){
 		switch (method) {
@@ -226,10 +248,27 @@ const invest_option = function(details,inversion,salvamento,production,egresos) 
 				else s = 0;
 				const d = (base[0]-s)/n;
 				for (let i = 0; i<base.length;i++){
-					if(i<n)base[i] = d*i;
+					if(i<n)base[i] = d;
+					else base[i] = 0;
 				}
 			}
 				return;
+			case SDD:
+			{
+				const d = 2/n;
+				for (let i = 0; i<base.length;i++){
+					if(i<n) base[i] = d*base[i]*Math.pow(1-d,i);
+					else base[i] = 0;
+				}
+			}return;
+			case SMARC_:
+			{
+				const vals = SMARC[n];
+				for (let i = 0; i<base.length;i++){
+					if(i<n+1) base[i] = base[i]*(vals[i]/100);
+					else base[i] = 0;
+				}
+			}return;
 		}
 	};
 	this.calculate_deprecation = function (method){
@@ -255,10 +294,10 @@ const invest_option = function(details,inversion,salvamento,production,egresos) 
 		subject[ISR] = multiply_constant(subject[GRAVABLE],this.details["ISR"]);
 		subject[POST_ISR] = subtract_arrays(subject[GRAVABLE],subject[ISR]);
 		subject[POST_ISR_PLUS_DEPRECATION] = sum_arrays(subject[TOTAL_DEPRECATION],subject[POST_ISR]);
-		let final_flow = [this.inversion["Total"],...subject[POST_ISR_PLUS_DEPRECATION]];
-		final_flow[final_flow.length-1] = final_flow[final_flow.length-1] + this.salvamento["Total"];
+		let final_flow = [-this.inversion["Total"][0],...subject[POST_ISR_PLUS_DEPRECATION]];
+		final_flow[final_flow.length-1] = final_flow[final_flow.length-1] + this.salvamento["Total"][0];
 		subject = shift_table(subject,1);
-		Printing.printLog(method);
+		Printing.printTitle(method);
 		Printing.printTable(subject,true);
 		const vessel = {};
 		vessel[FINAL_FLOW] = final_flow;
@@ -285,6 +324,10 @@ const Printing = {
 			this.print(',')
 		}
 		this.print('\n')
+	},
+	printTitle:function(text){
+		this.printLog(fill_string(general_size,'*'));
+		this.printLog(text);
 	},
 	printString:function(text){
 		let s = document.getElementById(this.output).value;
@@ -579,7 +622,7 @@ const details = function(anualidad,ingresos,egresos,vida,name){
 		keys.forEach(key=>{draw_box_line(key,inverse[key],ingresos);});
 		const indexes = [];
 		for(let i = 0; i<ingresos.length;i++)indexes.push(i);
-		Printing.printLine(indexes);
+		Printing.printLine(indexes,false);
 		keys = trueShellSort(keys,true);
 		keys.forEach(key=>{draw_box_line(key,inverse[key],egresos);});
 	}
@@ -808,7 +851,7 @@ function analyze_options(){
 }
 function perform_analysis() {
 	const k  = project = JSON.parse(get_source('source'));
-	const test = new invest_option(k.detalles,k.inversion,k.salvamento,k.produccion,k.egresos)
+	const test = new invest_option(k.detalles, k.inversion, k.salvamento, k.produccion, k.egresos)
 	test.analyze();
 	//analyze_options();
 }

@@ -20,7 +20,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab6b1a15-9e4c-46bd-90a0-b439f731c7a3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/i1.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
     </list>
@@ -91,23 +90,25 @@
       <workItem from="1586891216255" duration="2132000" />
       <workItem from="1586903597927" duration="27000" />
       <workItem from="1587994887377" duration="31181000" />
+      <workItem from="1588100308526" duration="3434000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="94" y="149" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586891238716">
@@ -204,6 +205,10 @@
       <screen x="0" y="0" width="1280" height="984" />
     </state>
     <state x="285" y="82" width="709" height="819" key="find.popup/0.0.1280.984@0.0.1280.984" timestamp="1586892105509" />
+    <state x="381" y="127" key="refactoring.ChangeSignatureDialog" timestamp="1588101512952">
+      <screen x="0" y="0" width="1280" height="984" />
+    </state>
+    <state x="381" y="127" key="refactoring.ChangeSignatureDialog/0.0.1280.984@0.0.1280.984" timestamp="1588101512952" />
     <state x="63" y="26" width="672" height="678" key="search.everywhere.popup" timestamp="1586706332770">
       <screen x="0" y="27" width="800" height="573" />
     </state>
