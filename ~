@@ -1,0 +1,14 @@
+source = '''
+33.33
+
+44.45
+
+14.81
+
+7.41
+'''
+source = source.split('\n')
+for s in source:
+    if s is not '':
+        print(s)
+

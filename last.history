@@ -1,0 +1,264 @@
+    1  unset ORACLE_HOME
+    2  unset ORACLE_BASE
+    3  touch config.sh
+    4  sqlplus
+    5  echo  $ORACLE_HOME
+    6  echo $ORACLE_HOME
+    7  cd  $ORACLE_HOME
+    8  cd $ORACLE_HOME
+    9  cd $ORACLE_HOME/bin
+   10  ls
+   11  cd ~
+   12  cd /usr/local/bin
+   13  ls
+   14  sudo ./oraenv
+   15  ls
+   16  cd ..
+   17  ls
+   18  cd bin
+   19  ls
+   20  sqlplus
+   21  source /usr/lib/oracle/xe/app/oracle/product/10.2.0/server/bin/oracle_env.sh
+   22  cat /usr/lib/oracle/xe/app/oracle/product/10.2.0/server/bin/oracle_env.sh
+   23  cd /
+   24  cd usr/lib
+   25  ls
+   26  sqlplus
+   27  cd ~
+   28  cd Downloads
+   29  ls
+   30  sudo dnf localinstall flash-player-npapi-32.0.0.344-release.x86_64.rpm
+   31  sudo /etc/init.d/oracle-xe-18c config
+   32  sudo /etc/init.d/oracle-xe-18c configure
+   33  sudo /etc/init.d/oracle-xe-18c restart
+   34  hostname
+   35  id
+   36  echo $ORACLE_HOME
+   37  echo $ORACLE_SID
+   38  cd /
+   39  cd bin
+   40  ls
+   41  sh oracle-database-preinstall-18c-verify
+   42  sudo sh oracle-database-preinstall-18c-verify
+   43  sudo ./oracle-database-preinstall-18c-verify
+   44  sudo sh clion.sh
+   45  ls -l ~/.Xauthority
+   46  sudo sh clion.sh
+   47  clion
+   48  sudo touch arch.txt
+   49  sudo vim touch.txt
+   50  sudo chmod 777 arch.txt
+   51  vim arch.txt
+   52  cat arch.txt
+   53  git clone https://github.com/Renato776/raid1 --signle-branch home
+   54  git clone -b home --single-branch https://github.com/Renato776/raid1
+   55  ls
+   56  cd raid1
+   57  git -branch
+   58  git --help
+   59  git branch
+   60  cd /include
+   61  cd /
+   62  ls
+   63  cd usr
+   64  ls
+   65  cd include
+   66  ls
+   67  sudo touch zconfig.h
+   68  ls
+   69  sudo vim zconfig.h
+   70  sudo mv zconfig.h zconf.h
+   71  ls
+   72  sudo vim zconf.h
+   73  cd ~
+   74  xs ..
+   75  cd ..
+   76  sudo chmod -R 777 home
+   77  touch traverse.py
+   78  vim traverse.py
+   79  python3 traverse.py > traversal.txt
+   80  vim traverse.py
+   81  python3 traverse.py > traversal.txt
+   82  vim traverse.py
+   83  python3 traverse.py > traversal.txt
+   84  vim traversal.txt
+   85  vim traverse.py
+   86  sudo dnf install graphviz
+   87  cd ..
+   88  cd Projects
+   89  cd raid1
+   90  git add .
+   91  git commit -m "Started Tree report"
+   92  git push origin home
+   93  git add .
+   94  git commit -m "Implemented first tree report."
+   95  git push origin home
+   96  git add .
+   97  git commit -m "Started several reports."
+   98  git push origin home
+   99  git add .
+  100  git commit -m "Implemented first version of most reports."
+  101  git config --global --edit
+  102  git push origin home
+  103  git add .
+  104  git commit -m "Fixed tree report"
+  105  git push origin home
+  106  git add .
+  107  git commit -m "Fixed tree report!"
+  108  git push origin home
+  109  git add .
+  110  git commit -m "Fixed most reportsgit add ."
+  111  git push origin home
+  112  git add .
+  113  git commit -m "Implemented System loss & recovery!"
+  114  git push origin home
+  115  git add .
+  116  git commit -m "Finished The whole project!"
+  117  git push origin home
+  118  git add .
+  119  git commit -m "Added a more flexible tree report"
+  120  git push origin home
+  121  neato tree01.dot -o tree01.svg
+  122  neato -Tpng tree01.dot -o tree01.png
+  123  neato -Tsvg tree03.dot -o tree04.png
+  124  dot -Tpng v.dot -o v.png
+  125  neato -Tpng v.dot -o v.png
+  126  dot -Tpng v.dot -o v.png
+  127  cd ..
+  128  ls
+  129  cd reportes
+  130  ls
+  131  dot -Tpng v.dot -o v.png
+  132  dot -Tpng jhope.dot -o jhope.png
+  133  cd ~
+  134  touch format_json.sh
+  135  vim format_json.sh
+  136  ls
+  137  vim format_json.sh
+  138  sudo dnf install jq
+  139  ls
+  140  cat project.json | jq
+  141  cat project.json | jq > project.json
+  142  cat project.json | jq . > project.json
+  143  jq project.json
+  144  cat project.json
+  145  cat project.json | jq > second.json
+  146  ls
+  147  cat second.json
+  148  vim second.sjon
+  149  ls
+  150  vim second.json
+  151  ls
+  152  cat project.json | jq '.' > second.json
+  153  vim second.json
+  154  ls
+  155  rm second.json
+  156  vim project.json
+  157  cat project.json | jq '.' > .json
+  158  vim project.json
+  159  sh ~/format_json.sh project.json
+  160  sh ~/format_json.sh proj
+  161  vim project.json
+  162  sh ~/format_json.sh project.json
+  163  vim project.json
+  164  git clone https://github.com/astrand/xclip.git
+  165  ls
+  166  cd xclip
+  167  ls
+  168  ./bootstrap
+  169  ./configure
+  170  sudo ./configure
+  171  sudo ./bootstrap
+  172  sudo ./configure
+  173  cd /usr/include/X11
+  174  cd Xmu
+  175  ls
+  176  cd ~/Downloads
+  177  ls
+  178  sudo dnf localinstall libXmu-devel-1.1.2-2.el7.x86_64.rpm
+  179  ls
+  180  sudo dnf localinstall libXmu-1.1.2-2.el7.x86_64.rpm
+  181  sudo dnf localinstall libXmu-devel-1.1.2-2.el7.x86_64.rpm
+  182  cd /usr/include/X11
+  183  ls
+  184  cd Xmu
+  185  ls
+  186  sudo ./configure
+  187  cd ~/temp
+  188  sudo ./configure
+  189  cd xclip
+  190  sudo ./configure
+  191  sudo make
+  192  sudo make install
+  193  man xclip
+  194  ls
+  195  sh webstorm.sh
+  196  cd ~/Projects/evaluacion_de_proyectos
+  197  ls
+  198  node index.js p2.json
+  199  vm index.js
+  200  vim index.js
+  201  node index.js p2.json
+  202  git add .
+  203  git commit -m "Fixed small TIR bug"
+  204  git push origin master
+  205  sudo mv /etc/localtime /etc/localtime.backup
+  206  cd ~
+  207  sudo ln -s /usr/share/zoneinfo/America/Guatemala /etc/localtime
+  208  sudo cat /etc/sysconfig/clock
+  209  sudo timedatectl set-timezone America/Guatemala
+  210  timedatectl
+  211  timedatectl set-ntp yes
+  212  timedatectl
+  213  sudo timedatectl set-ntp yes
+  214  timedatectl
+  215  sudo dnf install chrony
+  216  sudo timedatectl set-ntp yes
+  217  timedatectl
+  218  systemctl status chronyd
+  219  timedatectl
+  220  sudo timedatectl set-time 2020-04-14
+  221  sudo timedatectl set-ntp no
+  222  sudo timedatectl set-time 2020-04-14
+  223  sudo timedatectl set-time 2020-04-14 16:57:00
+  224  sudo timedatectl set-time 2020-04-14 16:58:00
+  225  sudo timedatectl set-time 2012-10-30 18:17:16
+  226  sudo timedatectl set-time "2020-04-14 17:01:10"
+  227  cd .
+  228  cd ..
+  229  git token
+  230  cd token
+  231  git clone -b browser --signle-branch 'https://github.com/Renato776/evaluacion_de_proyectos.git/'
+  232  git clone -b browser --single-branch 'https://github.com/Renato776/evaluacion_de_proyectos.git/'
+  233  cd ..
+  234  cd web_evaluacion_de_proyectos
+  235  ls
+  236  cd ~/Projects
+  237  ls
+  238  cd web_evaluacion_de_proyectos
+  239  ls
+  240  git add .
+  241  git commit -m "Fixed small Infinity TIR problem"
+  242  git push origin browser
+  243  sh ~/copy_file.sh p2.json
+  244  vim index.js
+  245  sh ~/copy_file.sh p2.json
+  246  sh ~/copy_file.sh p1.json
+  247  vim index.js
+  248  sh ~/copy_file.sh p2.json
+  249  sh ~/copy_file.sh p1.json
+  250  cd ..
+  251  ls
+  252  cd /usr/share/zoneinfo
+  253  ls
+  254  cd America
+  255  ls
+  256  cd ~/Projects
+  257  ls
+  258  cd web_evaluacion_de_proyectos
+  259  ls
+  260  vim index.js
+  261  history
+  262  sudo timedatectl set-time "2020-04-17 02:13:10"
+  263  sudo timedatectl set-time "2020-04-17 02:21:00"
+  264  history > last.history
