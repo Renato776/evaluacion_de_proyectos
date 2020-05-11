@@ -1,0 +1,68 @@
+{
+  "projects": [
+    {
+      "detalles": {
+        "name": "Electricidad",
+        "TMAR" : 10,
+        "inflacion": 0,
+        "costo de produccion por unidad" : 1,
+        "unidades de produccion": "N/A",
+        "moneda" : "Q",
+        "ISR": 7
+      },
+      "inversion": {
+        "aux": 4500
+      },
+      "salvamento": {
+        "last": 200
+      },
+      "produccion": {
+        "produccion estimada": [900,900,900,900,900,900],
+        "precio de venta estimado" : [0,0,0,0,0,0]
+      },
+      "egresos" : {}
+    },{
+      "detalles": {
+        "name": "Gas",
+        "TMAR" : 10,
+        "inflacion": 0,
+        "costo de produccion por unidad" : 1,
+        "unidades de produccion": "N/A",
+        "moneda" : "$",
+        "ISR": 7
+      },
+      "inversion": {
+        "aux": 3500
+      },
+      "salvamento": {
+        "last": 350
+      },
+      "produccion": {
+        "produccion estimada": [700,700,700,700,700,700],
+        "precio de venta estimado" : [0,0,0,0,0,0]
+      },
+      "egresos" : {}
+    },{
+      "detalles": {
+        "name": "Solar",
+        "TMAR" : 10,
+        "inflacion": 0,
+        "costo de produccion por unidad" : 1,
+        "unidades de produccion": "N/A",
+        "moneda" : "Q",
+        "ISR": 7
+      },
+      "inversion": {
+        "aux": 6000
+      },
+      "salvamento": {
+        "last": 100
+      },
+      "produccion": {
+        "produccion estimada": [50,50,50,50,50,50],
+        "precio de venta estimado" : [0,0,0,0,0,0]
+      },
+      "egresos" : {}
+    }
+  ]
+}

@@ -5,6 +5,7 @@
 * On the pop up window select the page tab.
 * Select orientation -> Landscape.
 * */
+const projects ={};
 //Region constants definition
 const PRECIO_VENTA = "precio de venta estimado";
 const PRODUCCION_ESTIMADA = "produccion estimada";
@@ -15,6 +16,8 @@ const COSTO_PRODUCCION_UNIDAD = "costo de produccion por unidad";
 const COSTO_PRODUCCION = "costo de produccion estimado";
 const SALARIOS = "salarios";
 const IMPREVISTOS = "imprevistos";
+const EGRESOS_VARIOS = "Egresos Varios";
+const INGRESOS_VARIOS = "Ingresos Varios";
 const PRESTACIONES = "prestaciones";
 const LINEA_RECTA = "Depreciacion Linea Recta";
 const TOTAL_DEPRECATION = "Total depreciacion";
@@ -138,7 +141,7 @@ function multiply_constant(array,constant){
 	}
 	return array;
 }
-const invest_option = function (details_, inversion, salvamento, production, egresos) {
+const invest_option = function (details_, inversion, salvamento, production, egresos,ingresos_varios,egresos_varios) {
 	this.details = details_;
 	currency = this.details["moneda"];
 	this.details.inflacion = this.details.inflacion/100;
@@ -172,6 +175,12 @@ const invest_option = function (details_, inversion, salvamento, production, egr
 		this.vida = this.production[PRODUCCION_ESTIMADA].length;
 		this.production[INGRESOS_TOTALES] = multiply_arrays(this.production[PRODUCCION_ESTIMADA],
 			this.production[PRECIO_VENTA]);
+		if(ingresos_varios){
+			this.production[INGRESOS_VARIOS]  = ingresos_varios;
+			this.production[INGRESOS_TOTALES] = sum_arrays(
+				this.production[INGRESOS_TOTALES],this.production[INGRESOS_VARIOS]
+			);
+		}
 		let r = shift_table(this.production,1);
 		Printing.printTable(r,true,false);
 		Printing.printTitle('Egresos');
@@ -208,6 +217,9 @@ const invest_option = function (details_, inversion, salvamento, production, egr
 			sub_totals = sum_all(sub_totals);
 			this.spendings[IMPREVISTOS] = multiply_constant(sub_totals,this.details[IMPREVISTOS]);
 		}
+		if(egresos_varios){
+			this.spendings[EGRESOS_VARIOS] = egresos_varios;
+		}
 		let totals = Object.values(this.spendings);
 		this.spendings[EGRESOS_TOTALES] = sum_all(totals);
 		r = shift_table(this.spendings,1);
@@ -235,7 +247,15 @@ const invest_option = function (details_, inversion, salvamento, production, egr
 		});
 		Printing.printTitle('Resumen');
 		resumen(this.options);
-		Printing.save_csv();
+		if(this.details["method"])projects[this.details.name] = this.search_option(this.details["method"]);
+		else projects[this.details.name] = this.search_option(LINEA_RECTA);
+	};
+	this.search_option = function(key){
+		for	(let i = 0; i<this.options.length;i++){
+			let opt = this.options[i];
+			if(opt.name==key)return opt;
+		}
+		return undefined;
 	};
 	this.build_options = function(){
 	//THis method takes all the flows registered at the moment
@@ -309,16 +329,22 @@ const invest_option = function (details_, inversion, salvamento, production, egr
 				this.deprecate(subject[target],n,method,target);
 			}
 		});
-		subject[TOTAL_DEPRECATION] = sum_all(Object.values(subject));
-		subject[GRAVABLE] = subtract_arrays(this.flow[FLOW],subject[TOTAL_DEPRECATION]);
-		subject[ISR] = multiply_constant(subject[GRAVABLE],this.details["ISR"]);
-		subject[POST_ISR] = subtract_arrays(subject[GRAVABLE],subject[ISR]);
-		subject[POST_ISR_PLUS_DEPRECATION] = sum_arrays(subject[TOTAL_DEPRECATION],subject[POST_ISR]);
-		let final_flow = [-this.inversion["Total"][0],...subject[POST_ISR_PLUS_DEPRECATION]];
-		final_flow[final_flow.length-1] = final_flow[final_flow.length-1] + this.salvamento["Total"][0];
-		subject = shift_table(subject,1);
-		Printing.printTitle(method);
-		Printing.printTable(subject,true);
+		let final_flow;
+		if(Object.values(subject).length!=0){
+			subject[TOTAL_DEPRECATION] = sum_all(Object.values(subject));
+			subject[GRAVABLE] = subtract_arrays(this.flow[FLOW],subject[TOTAL_DEPRECATION]);
+			subject[ISR] = multiply_constant(subject[GRAVABLE],this.details["ISR"]);
+			subject[POST_ISR] = subtract_arrays(subject[GRAVABLE],subject[ISR]);
+			subject[POST_ISR_PLUS_DEPRECATION] = sum_arrays(subject[TOTAL_DEPRECATION],subject[POST_ISR]);
+			final_flow = [-this.inversion["Total"][0],...subject[POST_ISR_PLUS_DEPRECATION]];
+			final_flow[final_flow.length-1] = final_flow[final_flow.length-1] + this.salvamento["Total"][0];
+			subject = shift_table(subject,1);
+			Printing.printTitle(method);
+			Printing.printTable(subject,true);
+		}else{
+			final_flow = [-this.inversion["Total"][0],...this.flow[FLOW]];
+			final_flow[final_flow.length-1] = final_flow[final_flow.length-1] + this.salvamento["Total"][0];
+		}
 		const vessel = {};
 		vessel[FINAL_FLOW] = final_flow;
 		Printing.printTable(vessel,true);
@@ -328,7 +354,7 @@ const invest_option = function (details_, inversion, salvamento, production, egr
 const Printing = {
 	output: "output",
 	printSubTitle:function(text){
-		format_title(Math.floor(3*general_size/4),text);
+		format_title(Math.floor(general_size-2),text);
 	},
 	save_csv:function(){
 		const text = document.getElementById(this.output).value;
@@ -358,6 +384,7 @@ const Printing = {
 	printTitle:function(text){
 		this.printLog(fill_string(general_size,'*'));
 		this.printLog(text);
+		this.printLog(fill_string(general_size,'*'));
 	},
 	printString:function(text){
 		let s = document.getElementById(this.output).value;
@@ -838,30 +865,23 @@ function resumen(opts){
 	}
 	Printing.printTable(useFull_data,false,false);
 }
-function analisis_beneficio_costo_incremental(){
+function analisis_beneficio_costo_incremental(opts){
 	//First thing first, order the opts array by
-	let table = [];
+	let table = {
+		"dif_vpb":[],"dif_vpc":[],"title":[],
+		"vpb/vpc":[],"Justifica":[]
+	};
 	for (let i = opts.length-1; i>0;i--){
 		let b = opts[i];
 		let a = opts[i-1];
-		let entry = {};
-		entry["dif_vpb"] = b.vpb - a.vpb;
-		entry["dif_vpc"] = b.vpc - a.vpc;
-		entry["title"] = b.name +" - "+a.name;
-		entry["vpb/vpc"] = entry.dif_vpb/entry.dif_vpc;
-		entry["Justifica"] = entry["vpb/vpc"] >= 1;
-		table.push(entry);
-	}table = table.reverse();
-	print_table_title("Testing Transpose Table building: ",general_size);
-	Printing.printTable(opts[0].details,true);
-	print_table_title("Testing Vertical Table Building: ",general_size);
-	Printing.printTable(opts[0].details);
-	opts.forEach(opt=>{
-		print_table_title('BOX Diagram for: '+opt.name,general_size);
-		opt.details.boxDiagram();
-	});
-	print_table_title("OG Analisis Beneficio Costo incremental",general_size);
-	print_object_list(table,general_size);
+		table["dif_vpb"].push( b.vpb - a.vpb);
+		table["dif_vpc"].push(b.vpc - a.vpc);
+		table["title"].push(b.name +" - "+a.name);
+		table["vpb/vpc"].push( table.dif_vpb/table.dif_vpc);
+		table["Justifica"].push((table["vpb/vpc"] >= 1)?'SI':'NO');
+	}
+	Printing.printSubTitle("Analisis Beneficio Costo incremental",general_size);
+	Printing.printTable(table,false,false);
 }
 let project;
 let interest;
@@ -898,21 +918,46 @@ function analyze_options(){
 	* all project lives and expands all options accordingly.
 	* TMR is expected to be set previously as a Global variable.
 	* */
+	let option_lives = [];
+	let opts = [];
+	let title = 'Comparacion ';
+	const keys = Object.keys(projects);
+	keys.forEach(key=>{
+		title+= key+' vs ';
+		let opt = projects[key];
+		opt["name"] = key;
+		opt.details["name"] = key;
+		opts.push(opt);
+		option_lives.push(opt.details.vida);
+	});
+	title = title.substring(0,title.length-4);
+	Printing.printLog(format(title));
 	const period = option_lives.reduce(lcm);
-	print_table_title('Flow period (mcm): '+period,general_size);
 	opts.forEach(opt=>{opt.expand(period)});
-	opts.forEach(opt=>{opt.process();opt.set_differences();});
+	opts.forEach(opt=>{
+		Printing.printTitle(opt.name);
+		opt.details.boxDiagram();
+		Printing.printSubTitle('VPN');
+		opt.vpn = calculate_vpn(opt.details,opt.interest,true);
+		Printing.printSubTitle('VAUE');
+		opt.vaue = calculate_vaue(opt.details,opt.interest,true);
+		Printing.printSubTitle('TIR');
+		opt.calculate_tir(true);
+		opt.set_differences();
+	});
 	const vpns =[];
 	opts.forEach(opt=>{vpns.push(opt.vpn)});
 	opts[get_max(vpns)].is_best = true;
-	opts.forEach(opt=>{opt.calculate_tir()});
 	opts = shellSort(opts);
-	analisis_beneficio_costo_incremental();
-	resumen();
+	analisis_beneficio_costo_incremental(opts);
+	resumen(opts);
 }
 function perform_analysis() {
-	const k  = project = JSON.parse(get_source('source'));
-	const test = new invest_option(k.detalles, k.inversion, k.salvamento, k.produccion, k.egresos)
-	test.analyze();
-	//analyze_options();
+	const kk  = project = JSON.parse(get_source('source'));
+	kk["projects"].forEach(k=>{
+		const test = new invest_option(k.detalles, k.inversion, k.salvamento, k.produccion, k.egresos,k[INGRESOS_VARIOS],k[EGRESOS_VARIOS])
+		test.analyze();
+	});
+	if(Object.values(projects).length>=2)analyze_options();
+	Printing.save_csv();
 }
