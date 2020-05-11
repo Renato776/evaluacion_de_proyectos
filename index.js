@@ -176,18 +176,26 @@ const invest_option = function (details_, inversion, salvamento, production, egr
 		Printing.printTable(r,true,false);
 		Printing.printTitle('Egresos');
 		this.spendings = {};
-		let production_costs = constant_array(this.details[COSTO_PRODUCCION_UNIDAD],this.vida);
-		let pc = production_costs.slice(1,production_costs.length);
-		pc = multiply_constant(pc,this.details["inflacion"]+1);
-		production_costs = [production_costs[0],...pc];
-		production_costs = multiply_arrays(production_costs,this.production[PRODUCCION_ESTIMADA])
-		//Alright, the first thing to add to egresos is production cost per year.
-		this.spendings[COSTO_PRODUCCION] = production_costs;
+		if(COSTO_PRODUCCION in this.egresos){
+			this.spendings[COSTO_PRODUCCION]=this.egresos[COSTO_PRODUCCION];
+		}else{
+			let production_costs = constant_array(this.details[COSTO_PRODUCCION_UNIDAD],this.vida);
+			let pc = production_costs.slice(1,production_costs.length);
+			pc = multiply_constant(pc,this.details["inflacion"]+1);
+			production_costs = [production_costs[0],...pc];
+			production_costs = multiply_arrays(production_costs,this.production[PRODUCCION_ESTIMADA])
+			//Alright, the first thing to add to egresos is production cost per year.
+			this.spendings[COSTO_PRODUCCION] = production_costs;
+		}
 		let keys = Object.keys(this.egresos);
 		const size = this.vida;
 		keys.forEach(key=>{
-			this.spendings[key] = constant_array(this.egresos[key],size);
-			exponential_grow(this.spendings[key],this.details["inflacion"]);
+			if((Array.isArray(this.egresos[key]))){
+				this.spendings[key] = this.egresos[key];
+			}else {
+				this.spendings[key] = constant_array(this.egresos[key],size);
+				exponential_grow(this.spendings[key],this.details["inflacion"]);
+			}
 		});
 		if(SALARIOS in this.spendings)
 		{
