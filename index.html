@@ -14,70 +14,35 @@
 <a id="download_link" style="display:none;" download="solution.csv" href=”” >Download solution</a>
 <textarea id=source cols = "102" rows = "30">
 {
-  "interest": 10,
-  "options": [
-    {
-      "name": "electricidad",
-      "anualidad": -900,
-      "ingresos": [
-        {
-          "valor": 200,
-          "ocurre": [
-            6
-          ]
-        }
-      ],
-      "egresos": [
-        {
-          "valor": 4500,
-          "ocurre": [
-            0
-          ]
-        }
-      ],
-      "vida": 6
-    },{
-      "name": "gas",
-      "anualidad": -700,
-      "ingresos": [
-        {
-          "valor": 350,
-          "ocurre": [
-            6
-          ]
-        }
-      ],
-      "egresos": [
-        {
-          "valor": 3500,
-          "ocurre": [
-            0
-          ]
-        }
-      ],
-      "vida": 6
-    },{
-      "name": "solar",
-      "anualidad": -50,
-      "ingresos": [
-        {
-          "valor": 100,
-          "ocurre": [
-            6
-          ]
-        }
-      ],
-      "egresos": [
-        {
-          "valor": 6000,
-          "ocurre": [
-            0
-          ]
-        }
-      ],
-      "vida": 6
-    }
-  ]
+  "detalles": {
+    "name": "Granja Avicola",
+    "TMAR" : 25,
+    "inflacion": 3.5,
+    "costo de produccion por unidad" : 7.0025,
+    "unidades de produccion": "libras",
+    "moneda" : "Q",
+    "ISR": 7
+  },
+  "inversion": {
+    "terreno": 79000,
+    "edificios e instalaciones": 382222,
+    "maquinaria avicola": 15073,
+    "mobiliario y equipo": 6605,
+    "vehiculo": 50000,
+    "capital de trabajo": 50850
+  },
+  "salvamento": {
+    "edificios e instalaciones": 250000
+  },
+  "produccion": {
+    "produccion estimada": [112500,130000,140300,150800,162000,173500],
+    "precio de venta estimado" : [11.17,11.04,11.92,11.79,12.06,12.53]
+  },
+  "egresos" : {
+    "salarios": [12100,3000,12100,3000,12100,457000],
+    "costo de produccion estimado": [5.1,6,8,4.5,3,7],
+    "otros":26275
+  }
 }
 </textarea>
 <script>
